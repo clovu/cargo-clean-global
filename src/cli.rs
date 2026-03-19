@@ -1,6 +1,10 @@
+use std::ffi::OsString;
 use std::path::PathBuf;
 
 use clap::{Parser, ValueHint};
+
+const SUBCOMMAND_NAME: &str = "clean-global";
+const DIRECT_INVOCATION_MESSAGE: &str = "run this tool as `cargo clean-global`; direct `cargo-clean-global` invocation is not supported";
 
 #[derive(Debug, Parser)]
 #[command(
@@ -25,9 +29,41 @@ pub struct Cli {
     pub roots: Vec<PathBuf>,
 }
 
+pub(crate) fn parse() -> Result<Cli, &'static str> {
+    let args = normalize_args(std::env::args_os(), std::env::var_os("CARGO").is_some())?;
+    Ok(Cli::parse_from(args))
+}
+
+fn normalize_args<I, T>(args: I, invoked_via_cargo: bool) -> Result<Vec<OsString>, &'static str>
+where
+    I: IntoIterator<Item = T>,
+    T: Into<OsString>,
+{
+    let mut args: Vec<OsString> = args.into_iter().map(Into::into).collect();
+
+    if invoked_via_cargo && has_cargo_forwarded_subcommand(&args) {
+        args.remove(1);
+        return Ok(args);
+    }
+
+    Err(DIRECT_INVOCATION_MESSAGE)
+}
+
+fn has_cargo_forwarded_subcommand(args: &[OsString]) -> bool {
+    if args.len() < 2 {
+        return false;
+    }
+
+    let Some(subcommand_name) = args[1].to_str() else {
+        return false;
+    };
+
+    subcommand_name == SUBCOMMAND_NAME
+}
+
 #[cfg(test)]
 mod tests {
-    use super::Cli;
+    use super::{Cli, normalize_args};
     use clap::Parser;
     use std::path::PathBuf;
 
@@ -54,5 +90,27 @@ mod tests {
     #[test]
     fn rejects_unknown_arguments() {
         assert!(Cli::try_parse_from(["cargo-clean-global", "--unknown"]).is_err());
+    }
+
+    #[test]
+    fn strips_forwarded_hyphenated_subcommand_name() {
+        let args = normalize_args(["cargo-clean-global", "clean-global", "--dry-run"], true)
+            .expect("cargo should normalize the forwarded subcommand name");
+        let options = Cli::try_parse_from(args)
+            .expect("cargo should be able to forward the hyphenated subcommand name");
+
+        assert!(options.dry_run);
+    }
+
+    #[test]
+    fn rejects_direct_binary_invocation() {
+        assert!(normalize_args(["cargo-clean-global", "--dry-run"], false).is_err());
+    }
+
+    #[test]
+    fn rejects_spoofed_subcommand_name_without_cargo_env() {
+        assert!(
+            normalize_args(["cargo-clean-global", "clean-global", "--dry-run",], false).is_err()
+        );
     }
 }

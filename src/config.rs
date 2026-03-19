@@ -4,7 +4,7 @@ use std::path::{Path, PathBuf};
 
 use toml::Value;
 
-use crate::paths::{cargo_home_dir, path_error, TARGET_DIR_NAME};
+use crate::paths::{TARGET_DIR_NAME, cargo_home_dir, path_error};
 use crate::types::{CargoProject, PathError};
 
 const CARGO_CONFIG_DIR_NAME: &str = ".cargo";

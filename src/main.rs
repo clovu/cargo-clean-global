@@ -1,7 +1,4 @@
-use clap::Parser;
 use std::process::ExitCode;
-
-use cli::Cli;
 
 mod app;
 mod cleanup;
@@ -13,5 +10,11 @@ mod paths;
 mod types;
 
 fn main() -> ExitCode {
-    app::run(Cli::parse())
+    match cli::parse() {
+        Ok(options) => app::run(options),
+        Err(message) => {
+            eprintln!("error: {message}");
+            ExitCode::from(2)
+        }
+    }
 }

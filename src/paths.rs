@@ -83,6 +83,7 @@ pub(crate) fn cargo_home_dir() -> Option<PathBuf> {
 #[cfg(test)]
 mod tests {
     use super::cargo_home_dir;
+    use std::ffi::OsString;
     use std::path::PathBuf;
     use std::sync::{Mutex, OnceLock};
 
@@ -93,12 +94,24 @@ mod tests {
         let expected = std::env::current_dir()
             .expect("current dir should exist")
             .join(&relative_home);
+        let original = std::env::var_os("CARGO_HOME");
 
-        std::env::set_var("CARGO_HOME", &relative_home);
+        unsafe {
+            std::env::set_var("CARGO_HOME", &relative_home);
+        }
         let resolved = cargo_home_dir().expect("cargo home should resolve");
-        std::env::remove_var("CARGO_HOME");
+        restore_cargo_home(original);
 
         assert_eq!(resolved, expected);
+    }
+
+    fn restore_cargo_home(original: Option<OsString>) {
+        unsafe {
+            match original {
+                Some(value) => std::env::set_var("CARGO_HOME", value),
+                None => std::env::remove_var("CARGO_HOME"),
+            }
+        }
     }
 
     fn env_lock() -> &'static Mutex<()> {

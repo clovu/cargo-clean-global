@@ -8,6 +8,8 @@ It is designed as the practical equivalent of a global Cargo clean operation. Be
 cargo clean-global
 ```
 
+Direct execution via `cargo-clean-global` is intentionally rejected. Use the Cargo subcommand form only.
+
 ## Installation
 
 ```bash
