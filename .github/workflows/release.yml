@@ -1,0 +1,220 @@
+name: Release
+
+on:
+  # Only publish when a version tag like v1.2.3 is pushed.
+  push:
+    tags:
+      - "v*"
+
+# Keep the default token as narrow as possible.
+permissions:
+  contents: read
+
+env:
+  CARGO_TERM_COLOR: always
+
+# Avoid overlapping release runs for the same tag.
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  check:
+    name: Check And Test
+    runs-on: ubuntu-latest
+
+    steps:
+      # Fetch the repository so Rust commands can inspect the workspace.
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      # Install the stable Rust toolchain and the components required for linting.
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt, clippy
+
+      # Reuse compiled dependencies between workflow runs to speed up CI.
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+
+      # Fail fast if the code formatting does not match rustfmt rules.
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+
+      # Validate that all workspace targets compile before packaging.
+      - name: Run cargo check
+        run: cargo check --workspace --all-targets --locked
+
+      # Treat Clippy warnings as errors so releases only happen on clean code.
+      - name: Run Clippy
+        run: cargo clippy --workspace --all-targets --all-features -- -D warnings
+
+      # Run the test suite before building release artifacts.
+      - name: Run tests
+        run: cargo test --workspace --all-features --locked
+
+  build:
+    name: Build ${{ matrix.platform }}
+    needs: check
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Build on native GitHub-hosted runners for each supported OS.
+          - os: ubuntu-latest
+            platform: linux
+            archive_ext: tar.gz
+            exe_suffix: ""
+          - os: macos-latest
+            platform: macos
+            archive_ext: tar.gz
+            exe_suffix: ""
+          - os: windows-latest
+            platform: windows
+            archive_ext: zip
+            exe_suffix: .exe
+
+    steps:
+      # Fetch the repository content used by the build.
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      # Install the stable Rust compiler used for release builds.
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      # Cache dependencies and incremental build output for faster packaging jobs.
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+
+      # Detect the root package name and binary targets dynamically to keep the workflow reusable.
+      - name: Detect package metadata
+        id: meta
+        shell: bash
+        run: |
+          python <<'PY'
+          import json
+          import os
+          import pathlib
+          import subprocess
+
+          metadata = json.loads(
+              subprocess.check_output(
+                  ["cargo", "metadata", "--no-deps", "--format-version", "1"],
+                  text=True,
+              )
+          )
+
+          workspace_root = pathlib.Path(metadata["workspace_root"]).resolve()
+          root_manifest = (workspace_root / "Cargo.toml").resolve()
+
+          root_package = None
+          for package in metadata["packages"]:
+              manifest_path = pathlib.Path(package["manifest_path"]).resolve()
+              if manifest_path == root_manifest:
+                  root_package = package
+                  break
+
+          if root_package is None:
+              raise SystemExit("Could not find the root package in cargo metadata.")
+
+          bin_names = [target["name"] for target in root_package["targets"] if "bin" in target["kind"]]
+          if not bin_names:
+              raise SystemExit("The root package does not define any binary targets to package.")
+
+          output_path = pathlib.Path(os.environ["GITHUB_OUTPUT"])
+          with output_path.open("a", encoding="utf-8") as output:
+              output.write(f"package_name={root_package['name']}\n")
+              output.write(f"bin_names={' '.join(bin_names)}\n")
+          PY
+
+      # Build optimized binaries for the current runner OS.
+      - name: Build release binaries
+        shell: bash
+        run: cargo build --release --locked --package "${{ steps.meta.outputs.package_name }}" --bins
+
+      # Gather binaries and common project files into a single staging directory.
+      - name: Prepare release bundle
+        id: bundle
+        shell: bash
+        run: |
+          archive_base="${{ steps.meta.outputs.package_name }}-${{ github.ref_name }}-${{ matrix.platform }}"
+          staging_dir="dist/${archive_base}"
+
+          mkdir -p "${staging_dir}"
+
+          for bin_name in ${{ steps.meta.outputs.bin_names }}; do
+            cp "target/release/${bin_name}${{ matrix.exe_suffix }}" "${staging_dir}/"
+          done
+
+          if [ -f README.md ]; then
+            cp README.md "${staging_dir}/"
+          fi
+
+          if [ -f LICENSE ]; then
+            cp LICENSE "${staging_dir}/"
+          fi
+
+          {
+            echo "archive_base=${archive_base}"
+            echo "staging_dir=${staging_dir}"
+          } >> "${GITHUB_OUTPUT}"
+
+      # Package Unix artifacts as tar.gz archives.
+      - name: Create tarball
+        if: matrix.archive_ext == 'tar.gz'
+        shell: bash
+        run: |
+          tar -czf "dist/${{ steps.bundle.outputs.archive_base }}.tar.gz" \
+            -C dist \
+            "${{ steps.bundle.outputs.archive_base }}"
+
+      # Package Windows artifacts as a zip archive.
+      - name: Create zip archive
+        if: matrix.archive_ext == 'zip'
+        shell: pwsh
+        run: |
+          Compress-Archive `
+            -Path "${{ steps.bundle.outputs.staging_dir }}" `
+            -DestinationPath "dist/${{ steps.bundle.outputs.archive_base }}.zip" `
+            -Force
+
+      # Store each packaged artifact in the workflow run for easy manual download.
+      - name: Upload workflow artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-${{ matrix.platform }}
+          path: dist/${{ steps.bundle.outputs.archive_base }}.${{ matrix.archive_ext }}
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    name: Publish Release
+    needs: build
+    runs-on: ubuntu-latest
+
+    # This job needs write access to create the GitHub Release and upload assets.
+    permissions:
+      contents: write
+
+    steps:
+      # Download all archives produced by the matrix build jobs.
+      - name: Download packaged artifacts
+        uses: actions/download-artifact@v4
+        with:
+          pattern: release-*
+          path: release-assets
+          merge-multiple: true
+
+      # Create or update the GitHub Release, upload assets, and auto-generate release notes.
+      - name: Publish GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: release-assets/*
+          fail_on_unmatched_files: true
+          generate_release_notes: true

@@ -1,0 +1,16 @@
+{
+  // ===================== Formatter Configs =====================
+  "[toml]": {
+    "editor.defaultFormatter": "tamasfe.even-better-toml",
+    "editor.formatOnSave": true
+  },
+  "[rust]": {
+    "editor.formatOnSave": true,
+  },
+  "rust-analyzer.check.command": "clippy",
+  // close inner type hints
+  "rust-analyzer.inlayHints.typeHints.enable": false,
+  "cSpell.words": [
+    "dotenv"
+  ],
+}
