@@ -163,10 +163,11 @@ fn default_scan_roots() -> Vec<PathBuf> {
     if let Some(home) = home {
         roots.push(home.clone());
 
-        if let Some(current) = current {
-            if current != home && !current.starts_with(&home) {
-                roots.push(current);
-            }
+        if let Some(current) = current
+            && current != home
+            && !current.starts_with(&home)
+        {
+            roots.push(current);
         }
     } else if let Some(current) = current {
         roots.push(current);
