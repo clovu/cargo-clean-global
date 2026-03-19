@@ -54,6 +54,80 @@ jobs:
       - name: Run tests
         run: cargo test --workspace --all-features --locked
 
+  publish:
+    name: Publish Crate
+    needs: check
+    runs-on: ubuntu-latest
+
+    steps:
+      # Fetch the tagged source code that will be published to crates.io.
+      - name: Check out source code
+        uses: actions/checkout@v4
+
+      # Install the stable Rust compiler used for packaging and publishing.
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@stable
+
+      # Reuse cached dependencies between release runs.
+      - name: Cache Cargo dependencies
+        uses: Swatinem/rust-cache@v2
+
+      # Validate that the pushed tag matches the package version in Cargo.toml.
+      - name: Detect package metadata
+        id: meta
+        shell: bash
+        env:
+          RELEASE_TAG: ${{ github.ref_name }}
+        run: |
+          python <<'PY'
+          import json
+          import os
+          import pathlib
+          import subprocess
+
+          metadata = json.loads(
+              subprocess.check_output(
+                  ["cargo", "metadata", "--no-deps", "--format-version", "1"],
+                  text=True,
+              )
+          )
+
+          workspace_root = pathlib.Path(metadata["workspace_root"]).resolve()
+          root_manifest = (workspace_root / "Cargo.toml").resolve()
+
+          root_package = None
+          for package in metadata["packages"]:
+              manifest_path = pathlib.Path(package["manifest_path"]).resolve()
+              if manifest_path == root_manifest:
+                  root_package = package
+                  break
+
+          if root_package is None:
+              raise SystemExit("Could not find the root package in cargo metadata.")
+
+          release_tag = os.environ["RELEASE_TAG"]
+          expected_tag = f"v{root_package['version']}"
+          if release_tag != expected_tag:
+              raise SystemExit(
+                  f"Release tag {release_tag!r} does not match Cargo.toml version tag {expected_tag!r}."
+              )
+
+          output_path = pathlib.Path(os.environ["GITHUB_OUTPUT"])
+          with output_path.open("a", encoding="utf-8") as output:
+              output.write(f"package_name={root_package['name']}\n")
+              output.write(f"package_version={root_package['version']}\n")
+          PY
+
+      # Build the distributable crate bundle before touching crates.io.
+      - name: Verify package contents
+        run: cargo package --locked --package "${{ steps.meta.outputs.package_name }}"
+
+      # Publish the tagged package version to crates.io.
+      - name: Publish crate
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CRATES_IO_TOKEN }}
+        run: cargo publish --locked --package "${{ steps.meta.outputs.package_name }}"
+
   build:
     name: Build ${{ matrix.platform }}
     needs: check
@@ -193,7 +267,9 @@ jobs:
 
   release:
     name: Publish Release
-    needs: build
+    needs:
+      - build
+      - publish
     runs-on: ubuntu-latest
 
     # This job needs write access to create the GitHub Release and upload assets.

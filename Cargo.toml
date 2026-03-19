@@ -4,8 +4,17 @@ version = "0.1.0"
 edition = "2021"
 description = "A safe Cargo plugin that cleans target directories across local Cargo projects."
 license = "MIT"
+repository = "https://github.com/clovu/cargo-clean-global"
 keywords = ["cargo", "clean", "target", "cli"]
 categories = ["command-line-utilities", "development-tools::cargo-plugins"]
+exclude = [
+  "/.DS_Store",
+  "/.editorconfig",
+  "/.github/",
+  "/.gitignore",
+  "/.vscode/",
+  "/target/",
+]
 
 [[bin]]
 name = "cargo-clean-global"

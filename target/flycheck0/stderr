@@ -1,5 +1,5 @@
-   0.016911542s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint: fingerprint error for cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global)/Check { test: false }/TargetInner { name: "cargo-clean-global", doc: true, ..: with_path("/Users/clovu/projects/i/cargo-clean-global/src/main.rs", Edition2021) }
-   0.016926042s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/cargo-clean-global-f8950edac75d26ab/bin-cargo-clean-global`
+   0.064101792s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint: fingerprint error for cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global)/Check { test: false }/TargetInner { name: "cargo-clean-global", doc: true, ..: with_path("/Users/clovu/projects/i/cargo-clean-global/src/main.rs", Edition2021) }
+   0.064444209s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/cargo-clean-global-f8950edac75d26ab/bin-cargo-clean-global`
 
 Caused by:
     No such file or directory (os error 2)
@@ -22,8 +22,8 @@ Stack backtrace:
   14: std::rt::lang_start::<()>::{closure#0}
   15: std::rt::lang_start_internal
   16: _main
-   0.018968875s  INFO prepare_target{force=false package_id=clap v4.6.0 target="clap"}: cargo::core::compiler::fingerprint: fingerprint error for clap v4.6.0/Check { test: false }/TargetInner { benched: false, ..: lib_target("clap", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/clap-4.6.0/src/lib.rs", Edition2024) }
-   0.018977000s  INFO prepare_target{force=false package_id=clap v4.6.0 target="clap"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/clap-87681e96aec21681/lib-clap`
+   0.074172917s  INFO prepare_target{force=false package_id=clap v4.6.0 target="clap"}: cargo::core::compiler::fingerprint: fingerprint error for clap v4.6.0/Check { test: false }/TargetInner { benched: false, ..: lib_target("clap", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/clap-4.6.0/src/lib.rs", Edition2024) }
+   0.074191334s  INFO prepare_target{force=false package_id=clap v4.6.0 target="clap"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/clap-87681e96aec21681/lib-clap`
 
 Caused by:
     No such file or directory (os error 2)
@@ -47,8 +47,8 @@ Stack backtrace:
   15: std::rt::lang_start::<()>::{closure#0}
   16: std::rt::lang_start_internal
   17: _main
-   0.019414250s  INFO prepare_target{force=false package_id=clap_derive v4.6.0 target="clap_derive"}: cargo::core::compiler::fingerprint: fingerprint error for clap_derive v4.6.0/Build/TargetInner { benched: false, for_host: true, proc_macro: true, ..: lib_target("clap_derive", ["proc-macro"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/clap_derive-4.6.0/src/lib.rs", Edition2024) }
-   0.019418083s  INFO prepare_target{force=false package_id=clap_derive v4.6.0 target="clap_derive"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/clap_derive-3357fa691a0e6174/lib-clap_derive`
+   0.074388375s  INFO prepare_target{force=false package_id=clap_builder v4.6.0 target="clap_builder"}: cargo::core::compiler::fingerprint: fingerprint error for clap_builder v4.6.0/Check { test: false }/TargetInner { benched: false, ..: lib_target("clap_builder", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/clap_builder-4.6.0/src/lib.rs", Edition2024) }
+   0.074395375s  INFO prepare_target{force=false package_id=clap_builder v4.6.0 target="clap_builder"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/clap_builder-04c040ab8ef7b215/lib-clap_builder`
 
 Caused by:
     No such file or directory (os error 2)
@@ -73,8 +73,8 @@ Stack backtrace:
   16: std::rt::lang_start::<()>::{closure#0}
   17: std::rt::lang_start_internal
   18: _main
-   0.019853500s  INFO prepare_target{force=false package_id=syn v2.0.117 target="syn"}: cargo::core::compiler::fingerprint: fingerprint error for syn v2.0.117/Build/TargetInner { ..: lib_target("syn", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.117/src/lib.rs", Edition2021) }
-   0.019856667s  INFO prepare_target{force=false package_id=syn v2.0.117 target="syn"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/syn-03cbbf3eaa3abf5b/lib-syn`
+   0.074579167s  INFO prepare_target{force=false package_id=anstream v1.0.0 target="anstream"}: cargo::core::compiler::fingerprint: fingerprint error for anstream v1.0.0/Check { test: false }/TargetInner { ..: lib_target("anstream", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/anstream-1.0.0/src/lib.rs", Edition2021) }
+   0.074582542s  INFO prepare_target{force=false package_id=anstream v1.0.0 target="anstream"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/anstream-af83724487c21ec7/lib-anstream`
 
 Caused by:
     No such file or directory (os error 2)
@@ -100,33 +100,8 @@ Stack backtrace:
   17: std::rt::lang_start::<()>::{closure#0}
   18: std::rt::lang_start_internal
   19: _main
-   0.019980042s  INFO prepare_target{force=false package_id=dirs-next v2.0.0 target="dirs_next"}: cargo::core::compiler::fingerprint: fingerprint error for dirs-next v2.0.0/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("dirs_next", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dirs-next-2.0.0/src/lib.rs", Edition2018) }
-   0.019983167s  INFO prepare_target{force=false package_id=dirs-next v2.0.0 target="dirs_next"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/dirs-next-e4c8d7f32c51e0b3/lib-dirs_next`
-
-Caused by:
-    No such file or directory (os error 2)
-
-Stack backtrace:
-   0: std::backtrace::Backtrace::create
-   1: cargo_util::paths::read_bytes
-   2: cargo_util::paths::read
-   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
-   4: cargo::core::compiler::fingerprint::prepare_target
-   5: cargo::core::compiler::compile
-   6: cargo::core::compiler::compile
-   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
-   8: cargo::ops::cargo_compile::compile_ws
-   9: cargo::ops::cargo_compile::compile_with_exec
-  10: cargo::ops::cargo_compile::compile
-  11: cargo::commands::check::exec
-  12: <cargo::cli::Exec>::exec
-  13: cargo::main
-  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
-  15: std::rt::lang_start::<()>::{closure#0}
-  16: std::rt::lang_start_internal
-  17: _main
-   0.020102333s  INFO prepare_target{force=false package_id=dirs-sys-next v0.1.2 target="dirs_sys_next"}: cargo::core::compiler::fingerprint: fingerprint error for dirs-sys-next v0.1.2/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("dirs_sys_next", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dirs-sys-next-0.1.2/src/lib.rs", Edition2018) }
-   0.020105458s  INFO prepare_target{force=false package_id=dirs-sys-next v0.1.2 target="dirs_sys_next"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/dirs-sys-next-4e5d11a1400fa829/lib-dirs_sys_next`
+   0.074781375s  INFO prepare_target{force=false package_id=anstyle v1.0.14 target="anstyle"}: cargo::core::compiler::fingerprint: fingerprint error for anstyle v1.0.14/Check { test: false }/TargetInner { ..: lib_target("anstyle", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/anstyle-1.0.14/src/lib.rs", Edition2021) }
+   0.074784250s  INFO prepare_target{force=false package_id=anstyle v1.0.14 target="anstyle"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/anstyle-83bd3688309a8de0/lib-anstyle`
 
 Caused by:
     No such file or directory (os error 2)
@@ -140,19 +115,162 @@ Stack backtrace:
    5: cargo::core::compiler::compile
    6: cargo::core::compiler::compile
    7: cargo::core::compiler::compile
-   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
-   9: cargo::ops::cargo_compile::compile_ws
-  10: cargo::ops::cargo_compile::compile_with_exec
-  11: cargo::ops::cargo_compile::compile
-  12: cargo::commands::check::exec
-  13: <cargo::cli::Exec>::exec
-  14: cargo::main
-  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
-  16: std::rt::lang_start::<()>::{closure#0}
-  17: std::rt::lang_start_internal
-  18: _main
-   0.020188042s  INFO prepare_target{force=false package_id=libc v0.2.183 target="libc"}: cargo::core::compiler::fingerprint: fingerprint error for libc v0.2.183/Check { test: false }/TargetInner { ..: lib_target("libc", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.183/src/lib.rs", Edition2021) }
-   0.020190500s  INFO prepare_target{force=false package_id=libc v0.2.183 target="libc"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/libc-1a6c2fa0728a51a3/lib-libc`
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.074894959s  INFO prepare_target{force=false package_id=anstyle-parse v1.0.0 target="anstyle_parse"}: cargo::core::compiler::fingerprint: fingerprint error for anstyle-parse v1.0.0/Check { test: false }/TargetInner { ..: lib_target("anstyle_parse", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/anstyle-parse-1.0.0/src/lib.rs", Edition2021) }
+   0.074897834s  INFO prepare_target{force=false package_id=anstyle-parse v1.0.0 target="anstyle_parse"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/anstyle-parse-568379ba7e0c59b6/lib-anstyle_parse`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.075022500s  INFO prepare_target{force=false package_id=utf8parse v0.2.2 target="utf8parse"}: cargo::core::compiler::fingerprint: fingerprint error for utf8parse v0.2.2/Check { test: false }/TargetInner { ..: lib_target("utf8parse", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/utf8parse-0.2.2/src/lib.rs", Edition2018) }
+   0.075025250s  INFO prepare_target{force=false package_id=utf8parse v0.2.2 target="utf8parse"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/utf8parse-f9d4cf0590c9fa66/lib-utf8parse`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.075119459s  INFO prepare_target{force=false package_id=anstyle-query v1.1.5 target="anstyle_query"}: cargo::core::compiler::fingerprint: fingerprint error for anstyle-query v1.1.5/Check { test: false }/TargetInner { ..: lib_target("anstyle_query", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/anstyle-query-1.1.5/src/lib.rs", Edition2021) }
+   0.075122125s  INFO prepare_target{force=false package_id=anstyle-query v1.1.5 target="anstyle_query"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/anstyle-query-1b8725718137f2f7/lib-anstyle_query`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.075221750s  INFO prepare_target{force=false package_id=colorchoice v1.0.5 target="colorchoice"}: cargo::core::compiler::fingerprint: fingerprint error for colorchoice v1.0.5/Check { test: false }/TargetInner { ..: lib_target("colorchoice", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/colorchoice-1.0.5/src/lib.rs", Edition2021) }
+   0.075224334s  INFO prepare_target{force=false package_id=colorchoice v1.0.5 target="colorchoice"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/colorchoice-c34bcf4dda2609f8/lib-colorchoice`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.075335292s  INFO prepare_target{force=false package_id=is_terminal_polyfill v1.70.2 target="is_terminal_polyfill"}: cargo::core::compiler::fingerprint: fingerprint error for is_terminal_polyfill v1.70.2/Check { test: false }/TargetInner { ..: lib_target("is_terminal_polyfill", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/is_terminal_polyfill-1.70.2/src/lib.rs", Edition2021) }
+   0.075338375s  INFO prepare_target{force=false package_id=is_terminal_polyfill v1.70.2 target="is_terminal_polyfill"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/is_terminal_polyfill-fc7ed1aadcb280b6/lib-is_terminal_polyfill`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.075442167s  INFO prepare_target{force=false package_id=clap_lex v1.1.0 target="clap_lex"}: cargo::core::compiler::fingerprint: fingerprint error for clap_lex v1.1.0/Check { test: false }/TargetInner { benched: false, ..: lib_target("clap_lex", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/clap_lex-1.1.0/src/lib.rs", Edition2024) }
+   0.075445084s  INFO prepare_target{force=false package_id=clap_lex v1.1.0 target="clap_lex"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/clap_lex-6d372a0a69f25cb7/lib-clap_lex`
 
 Caused by:
     No such file or directory (os error 2)
@@ -178,8 +296,115 @@ Stack backtrace:
   17: std::rt::lang_start::<()>::{closure#0}
   18: std::rt::lang_start_internal
   19: _main
-   0.020316958s  INFO prepare_target{force=false package_id=libc v0.2.183 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for libc v0.2.183/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.183/build.rs", Edition2021) }
-   0.020319375s  INFO prepare_target{force=false package_id=libc v0.2.183 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/libc-26f2eb22605b05e4/run-build-script-build-script-build`
+   0.075541084s  INFO prepare_target{force=false package_id=strsim v0.11.1 target="strsim"}: cargo::core::compiler::fingerprint: fingerprint error for strsim v0.11.1/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("strsim", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/strsim-0.11.1/src/lib.rs", Edition2015) }
+   0.075543625s  INFO prepare_target{force=false package_id=strsim v0.11.1 target="strsim"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/strsim-d88f9032a9f7aaab/lib-strsim`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.075631375s  INFO prepare_target{force=false package_id=clap_derive v4.6.0 target="clap_derive"}: cargo::core::compiler::fingerprint: fingerprint error for clap_derive v4.6.0/Build/TargetInner { benched: false, for_host: true, proc_macro: true, ..: lib_target("clap_derive", ["proc-macro"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/clap_derive-4.6.0/src/lib.rs", Edition2024) }
+   0.075635417s  INFO prepare_target{force=false package_id=clap_derive v4.6.0 target="clap_derive"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/clap_derive-3357fa691a0e6174/lib-clap_derive`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.075815125s  INFO prepare_target{force=false package_id=heck v0.5.0 target="heck"}: cargo::core::compiler::fingerprint: fingerprint error for heck v0.5.0/Build/TargetInner { name_inferred: true, ..: lib_target("heck", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/heck-0.5.0/src/lib.rs", Edition2021) }
+   0.075818125s  INFO prepare_target{force=false package_id=heck v0.5.0 target="heck"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/heck-5e0dc9e8fa1b5b9c/lib-heck`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.075934334s  INFO prepare_target{force=false package_id=proc-macro2 v1.0.106 target="proc_macro2"}: cargo::core::compiler::fingerprint: fingerprint error for proc-macro2 v1.0.106/Build/TargetInner { ..: lib_target("proc_macro2", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.106/src/lib.rs", Edition2021) }
+   0.075938500s  INFO prepare_target{force=false package_id=proc-macro2 v1.0.106 target="proc_macro2"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/proc-macro2-6fc2126da22cf8ae/lib-proc_macro2`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.076221667s  INFO prepare_target{force=false package_id=proc-macro2 v1.0.106 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for proc-macro2 v1.0.106/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.106/build.rs", Edition2021) }
+   0.076225375s  INFO prepare_target{force=false package_id=proc-macro2 v1.0.106 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/proc-macro2-972528369712508e/run-build-script-build-script-build`
 
 Caused by:
     No such file or directory (os error 2)
@@ -207,8 +432,177 @@ Stack backtrace:
   19: std::rt::lang_start::<()>::{closure#0}
   20: std::rt::lang_start_internal
   21: _main
-   0.020401917s  INFO prepare_target{force=false package_id=indicatif v0.17.11 target="indicatif"}: cargo::core::compiler::fingerprint: fingerprint error for indicatif v0.17.11/Check { test: false }/TargetInner { ..: lib_target("indicatif", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/indicatif-0.17.11/src/lib.rs", Edition2021) }
-   0.020404333s  INFO prepare_target{force=false package_id=indicatif v0.17.11 target="indicatif"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/indicatif-8212c10294fb4205/lib-indicatif`
+   0.076306625s  INFO prepare_target{force=false package_id=proc-macro2 v1.0.106 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for proc-macro2 v1.0.106/Build/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/proc-macro2-1.0.106/build.rs", Edition2021) }
+   0.076309667s  INFO prepare_target{force=false package_id=proc-macro2 v1.0.106 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/proc-macro2-e81c9c2415ed6fe7/build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.076425250s  INFO prepare_target{force=false package_id=unicode-ident v1.0.24 target="unicode_ident"}: cargo::core::compiler::fingerprint: fingerprint error for unicode-ident v1.0.24/Build/TargetInner { ..: lib_target("unicode_ident", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-ident-1.0.24/src/lib.rs", Edition2021) }
+   0.076428417s  INFO prepare_target{force=false package_id=unicode-ident v1.0.24 target="unicode_ident"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/unicode-ident-3a83af2464504a77/lib-unicode_ident`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.076521750s  INFO prepare_target{force=false package_id=quote v1.0.45 target="quote"}: cargo::core::compiler::fingerprint: fingerprint error for quote v1.0.45/Build/TargetInner { ..: lib_target("quote", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.45/src/lib.rs", Edition2021) }
+   0.076524625s  INFO prepare_target{force=false package_id=quote v1.0.45 target="quote"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/quote-ef9648b8c3f4dfef/lib-quote`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.076817292s  INFO prepare_target{force=false package_id=quote v1.0.45 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for quote v1.0.45/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.45/build.rs", Edition2021) }
+   0.076821375s  INFO prepare_target{force=false package_id=quote v1.0.45 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/quote-06977a74f197637f/run-build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::custom_build::build_work
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.076901042s  INFO prepare_target{force=false package_id=quote v1.0.45 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for quote v1.0.45/Build/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/quote-1.0.45/build.rs", Edition2021) }
+   0.076903584s  INFO prepare_target{force=false package_id=quote v1.0.45 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/quote-855b33fad8764043/build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.077008917s  INFO prepare_target{force=false package_id=syn v2.0.117 target="syn"}: cargo::core::compiler::fingerprint: fingerprint error for syn v2.0.117/Build/TargetInner { ..: lib_target("syn", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/syn-2.0.117/src/lib.rs", Edition2021) }
+   0.077011834s  INFO prepare_target{force=false package_id=syn v2.0.117 target="syn"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/syn-03cbbf3eaa3abf5b/lib-syn`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.077174500s  INFO prepare_target{force=false package_id=dirs-next v2.0.0 target="dirs_next"}: cargo::core::compiler::fingerprint: fingerprint error for dirs-next v2.0.0/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("dirs_next", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dirs-next-2.0.0/src/lib.rs", Edition2018) }
+   0.077178084s  INFO prepare_target{force=false package_id=dirs-next v2.0.0 target="dirs_next"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/dirs-next-e4c8d7f32c51e0b3/lib-dirs_next`
 
 Caused by:
     No such file or directory (os error 2)
@@ -232,8 +626,8 @@ Stack backtrace:
   15: std::rt::lang_start::<()>::{closure#0}
   16: std::rt::lang_start_internal
   17: _main
-   0.020530375s  INFO prepare_target{force=false package_id=console v0.15.11 target="console"}: cargo::core::compiler::fingerprint: fingerprint error for console v0.15.11/Check { test: false }/TargetInner { ..: lib_target("console", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/console-0.15.11/src/lib.rs", Edition2021) }
-   0.020532708s  INFO prepare_target{force=false package_id=console v0.15.11 target="console"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/console-e356c5577b1ea136/lib-console`
+   0.077301625s  INFO prepare_target{force=false package_id=cfg-if v1.0.4 target="cfg_if"}: cargo::core::compiler::fingerprint: fingerprint error for cfg-if v1.0.4/Check { test: false }/TargetInner { ..: lib_target("cfg_if", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/cfg-if-1.0.4/src/lib.rs", Edition2018) }
+   0.077304459s  INFO prepare_target{force=false package_id=cfg-if v1.0.4 target="cfg_if"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/cfg-if-9f5c035e4a47d6d5/lib-cfg_if`
 
 Caused by:
     No such file or directory (os error 2)
@@ -258,8 +652,8 @@ Stack backtrace:
   16: std::rt::lang_start::<()>::{closure#0}
   17: std::rt::lang_start_internal
   18: _main
-   0.020712750s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="portable_atomic"}: cargo::core::compiler::fingerprint: fingerprint error for portable-atomic v1.13.1/Check { test: false }/TargetInner { doc_scrape_examples: Disabled, ..: lib_target("portable_atomic", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/portable-atomic-1.13.1/src/lib.rs", Edition2018) }
-   0.020715500s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="portable_atomic"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/portable-atomic-5d005fdd903687da/lib-portable_atomic`
+   0.077419625s  INFO prepare_target{force=false package_id=dirs-sys-next v0.1.2 target="dirs_sys_next"}: cargo::core::compiler::fingerprint: fingerprint error for dirs-sys-next v0.1.2/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("dirs_sys_next", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/dirs-sys-next-0.1.2/src/lib.rs", Edition2018) }
+   0.077422542s  INFO prepare_target{force=false package_id=dirs-sys-next v0.1.2 target="dirs_sys_next"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/dirs-sys-next-4e5d11a1400fa829/lib-dirs_sys_next`
 
 Caused by:
     No such file or directory (os error 2)
@@ -284,8 +678,250 @@ Stack backtrace:
   16: std::rt::lang_start::<()>::{closure#0}
   17: std::rt::lang_start_internal
   18: _main
-   0.020840417s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for portable-atomic v1.13.1/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/portable-atomic-1.13.1/build.rs", Edition2018) }
-   0.020842833s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/portable-atomic-1ca1dc377d47697f/run-build-script-build-script-build`
+   0.077554709s  INFO prepare_target{force=false package_id=libc v0.2.183 target="libc"}: cargo::core::compiler::fingerprint: fingerprint error for libc v0.2.183/Check { test: false }/TargetInner { ..: lib_target("libc", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.183/src/lib.rs", Edition2021) }
+   0.077557459s  INFO prepare_target{force=false package_id=libc v0.2.183 target="libc"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/libc-1a6c2fa0728a51a3/lib-libc`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.077825542s  INFO prepare_target{force=false package_id=libc v0.2.183 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for libc v0.2.183/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.183/build.rs", Edition2021) }
+   0.077828834s  INFO prepare_target{force=false package_id=libc v0.2.183 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/libc-26f2eb22605b05e4/run-build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::custom_build::build_work
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.077913125s  INFO prepare_target{force=false package_id=libc v0.2.183 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for libc v0.2.183/Build/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/libc-0.2.183/build.rs", Edition2021) }
+   0.077915959s  INFO prepare_target{force=false package_id=libc v0.2.183 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/libc-573a3052acf1af5c/build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.078032917s  INFO prepare_target{force=false package_id=indicatif v0.17.11 target="indicatif"}: cargo::core::compiler::fingerprint: fingerprint error for indicatif v0.17.11/Check { test: false }/TargetInner { ..: lib_target("indicatif", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/indicatif-0.17.11/src/lib.rs", Edition2021) }
+   0.078036292s  INFO prepare_target{force=false package_id=indicatif v0.17.11 target="indicatif"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/indicatif-8212c10294fb4205/lib-indicatif`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   8: cargo::ops::cargo_compile::compile_ws
+   9: cargo::ops::cargo_compile::compile_with_exec
+  10: cargo::ops::cargo_compile::compile
+  11: cargo::commands::check::exec
+  12: <cargo::cli::Exec>::exec
+  13: cargo::main
+  14: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  15: std::rt::lang_start::<()>::{closure#0}
+  16: std::rt::lang_start_internal
+  17: _main
+   0.078218375s  INFO prepare_target{force=false package_id=console v0.15.11 target="console"}: cargo::core::compiler::fingerprint: fingerprint error for console v0.15.11/Check { test: false }/TargetInner { ..: lib_target("console", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/console-0.15.11/src/lib.rs", Edition2021) }
+   0.078221750s  INFO prepare_target{force=false package_id=console v0.15.11 target="console"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/console-e356c5577b1ea136/lib-console`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.078388334s  INFO prepare_target{force=false package_id=once_cell v1.21.4 target="once_cell"}: cargo::core::compiler::fingerprint: fingerprint error for once_cell v1.21.4/Check { test: false }/TargetInner { ..: lib_target("once_cell", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/once_cell-1.21.4/src/lib.rs", Edition2021) }
+   0.078391500s  INFO prepare_target{force=false package_id=once_cell v1.21.4 target="once_cell"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/once_cell-ead5bbecd288ecee/lib-once_cell`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.078513917s  INFO prepare_target{force=false package_id=unicode-width v0.2.2 target="unicode_width"}: cargo::core::compiler::fingerprint: fingerprint error for unicode-width v0.2.2/Check { test: false }/TargetInner { ..: lib_target("unicode_width", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/unicode-width-0.2.2/src/lib.rs", Edition2021) }
+   0.078517209s  INFO prepare_target{force=false package_id=unicode-width v0.2.2 target="unicode_width"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/unicode-width-0b9823758e0fdfdf/lib-unicode_width`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.078617459s  INFO prepare_target{force=false package_id=number_prefix v0.4.0 target="number_prefix"}: cargo::core::compiler::fingerprint: fingerprint error for number_prefix v0.4.0/Check { test: false }/TargetInner { name_inferred: true, ..: lib_target("number_prefix", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/number_prefix-0.4.0/src/lib.rs", Edition2015) }
+   0.078620292s  INFO prepare_target{force=false package_id=number_prefix v0.4.0 target="number_prefix"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/number_prefix-8daf3c6243a48b87/lib-number_prefix`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.078717334s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="portable_atomic"}: cargo::core::compiler::fingerprint: fingerprint error for portable-atomic v1.13.1/Check { test: false }/TargetInner { doc_scrape_examples: Disabled, ..: lib_target("portable_atomic", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/portable-atomic-1.13.1/src/lib.rs", Edition2018) }
+   0.078720875s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="portable_atomic"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/portable-atomic-5d005fdd903687da/lib-portable_atomic`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.078983292s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for portable-atomic v1.13.1/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/portable-atomic-1.13.1/build.rs", Edition2018) }
+   0.078986542s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/portable-atomic-1ca1dc377d47697f/run-build-script-build-script-build`
 
 Caused by:
     No such file or directory (os error 2)
@@ -312,8 +948,36 @@ Stack backtrace:
   18: std::rt::lang_start::<()>::{closure#0}
   19: std::rt::lang_start_internal
   20: _main
-   0.020919542s  INFO prepare_target{force=false package_id=toml v0.8.23 target="toml"}: cargo::core::compiler::fingerprint: fingerprint error for toml v0.8.23/Check { test: false }/TargetInner { ..: lib_target("toml", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml-0.8.23/src/lib.rs", Edition2021) }
-   0.020921708s  INFO prepare_target{force=false package_id=toml v0.8.23 target="toml"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/toml-fa29dd8dac2c5560/lib-toml`
+   0.079061750s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for portable-atomic v1.13.1/Build/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/portable-atomic-1.13.1/build.rs", Edition2018) }
+   0.079064709s  INFO prepare_target{force=false package_id=portable-atomic v1.13.1 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/portable-atomic-5a4259fbb65bd1d9/build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.079196167s  INFO prepare_target{force=false package_id=toml v0.8.23 target="toml"}: cargo::core::compiler::fingerprint: fingerprint error for toml v0.8.23/Check { test: false }/TargetInner { ..: lib_target("toml", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml-0.8.23/src/lib.rs", Edition2021) }
+   0.079199042s  INFO prepare_target{force=false package_id=toml v0.8.23 target="toml"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/toml-fa29dd8dac2c5560/lib-toml`
 
 Caused by:
     No such file or directory (os error 2)
@@ -337,8 +1001,8 @@ Stack backtrace:
   15: std::rt::lang_start::<()>::{closure#0}
   16: std::rt::lang_start_internal
   17: _main
-   0.021345083s  INFO prepare_target{force=false package_id=toml_edit v0.22.27 target="toml_edit"}: cargo::core::compiler::fingerprint: fingerprint error for toml_edit v0.22.27/Check { test: false }/TargetInner { ..: lib_target("toml_edit", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml_edit-0.22.27/src/lib.rs", Edition2021) }
-   0.021348000s  INFO prepare_target{force=false package_id=toml_edit v0.22.27 target="toml_edit"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/toml_edit-6cf42083fd83c354/lib-toml_edit`
+   0.079394042s  INFO prepare_target{force=false package_id=serde v1.0.228 target="serde"}: cargo::core::compiler::fingerprint: fingerprint error for serde v1.0.228/Check { test: false }/TargetInner { ..: lib_target("serde", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/src/lib.rs", Edition2021) }
+   0.079397125s  INFO prepare_target{force=false package_id=serde v1.0.228 target="serde"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/serde-85d9e67fc5cd7069/lib-serde`
 
 Caused by:
     No such file or directory (os error 2)
@@ -363,8 +1027,364 @@ Stack backtrace:
   16: std::rt::lang_start::<()>::{closure#0}
   17: std::rt::lang_start_internal
   18: _main
-   0.021664917s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint: fingerprint error for cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global)/Check { test: true }/TargetInner { name: "cargo-clean-global", doc: true, ..: with_path("/Users/clovu/projects/i/cargo-clean-global/src/main.rs", Edition2021) }
-   0.021668250s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/cargo-clean-global-3b3196b1efd73835/test-bin-cargo-clean-global`
+   0.079671292s  INFO prepare_target{force=false package_id=serde v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for serde v1.0.228/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/build.rs", Edition2021) }
+   0.079674084s  INFO prepare_target{force=false package_id=serde v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/serde-b60988c4f3503806/run-build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::custom_build::build_work
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.079774709s  INFO prepare_target{force=false package_id=serde v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for serde v1.0.228/Build/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde-1.0.228/build.rs", Edition2021) }
+   0.079777167s  INFO prepare_target{force=false package_id=serde v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/serde-c62a0869ec415630/build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.079886167s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="serde_core"}: cargo::core::compiler::fingerprint: fingerprint error for serde_core v1.0.228/Check { test: false }/TargetInner { ..: lib_target("serde_core", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.228/src/lib.rs", Edition2021) }
+   0.079888959s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="serde_core"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/serde_core-64579cb2fcb88754/lib-serde_core`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.080105959s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for serde_core v1.0.228/RunCustomBuild/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.228/build.rs", Edition2021) }
+   0.080108542s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/serde_core-9009d279787d5772/run-build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::custom_build::build_work
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.080177750s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint: fingerprint error for serde_core v1.0.228/Build/TargetInner { ..: custom_build_target("build-script-build", "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_core-1.0.228/build.rs", Edition2021) }
+   0.080180459s  INFO prepare_target{force=false package_id=serde_core v1.0.228 target="build-script-build"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/serde_core-0ccc1fe2c81d92cd/build-script-build-script-build`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: cargo::core::compiler::compile
+  11: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  12: cargo::ops::cargo_compile::compile_ws
+  13: cargo::ops::cargo_compile::compile_with_exec
+  14: cargo::ops::cargo_compile::compile
+  15: cargo::commands::check::exec
+  16: <cargo::cli::Exec>::exec
+  17: cargo::main
+  18: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  19: std::rt::lang_start::<()>::{closure#0}
+  20: std::rt::lang_start_internal
+  21: _main
+   0.080297375s  INFO prepare_target{force=false package_id=serde_spanned v0.6.9 target="serde_spanned"}: cargo::core::compiler::fingerprint: fingerprint error for serde_spanned v0.6.9/Check { test: false }/TargetInner { ..: lib_target("serde_spanned", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/serde_spanned-0.6.9/src/lib.rs", Edition2021) }
+   0.080300250s  INFO prepare_target{force=false package_id=serde_spanned v0.6.9 target="serde_spanned"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/serde_spanned-1bbad6b4ff376c91/lib-serde_spanned`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.080439792s  INFO prepare_target{force=false package_id=toml_datetime v0.6.11 target="toml_datetime"}: cargo::core::compiler::fingerprint: fingerprint error for toml_datetime v0.6.11/Check { test: false }/TargetInner { ..: lib_target("toml_datetime", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml_datetime-0.6.11/src/lib.rs", Edition2021) }
+   0.080442459s  INFO prepare_target{force=false package_id=toml_datetime v0.6.11 target="toml_datetime"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/toml_datetime-96f654352e883960/lib-toml_datetime`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.080585792s  INFO prepare_target{force=false package_id=toml_edit v0.22.27 target="toml_edit"}: cargo::core::compiler::fingerprint: fingerprint error for toml_edit v0.22.27/Check { test: false }/TargetInner { ..: lib_target("toml_edit", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml_edit-0.22.27/src/lib.rs", Edition2021) }
+   0.080588917s  INFO prepare_target{force=false package_id=toml_edit v0.22.27 target="toml_edit"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/toml_edit-6cf42083fd83c354/lib-toml_edit`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: <cargo::core::compiler::build_runner::BuildRunner>::compile
+   9: cargo::ops::cargo_compile::compile_ws
+  10: cargo::ops::cargo_compile::compile_with_exec
+  11: cargo::ops::cargo_compile::compile
+  12: cargo::commands::check::exec
+  13: <cargo::cli::Exec>::exec
+  14: cargo::main
+  15: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  16: std::rt::lang_start::<()>::{closure#0}
+  17: std::rt::lang_start_internal
+  18: _main
+   0.080797625s  INFO prepare_target{force=false package_id=indexmap v2.13.0 target="indexmap"}: cargo::core::compiler::fingerprint: fingerprint error for indexmap v2.13.0/Check { test: false }/TargetInner { benched: false, ..: lib_target("indexmap", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/indexmap-2.13.0/src/lib.rs", Edition2021) }
+   0.080800834s  INFO prepare_target{force=false package_id=indexmap v2.13.0 target="indexmap"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/indexmap-8dcb31ea000bab6b/lib-indexmap`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.080949084s  INFO prepare_target{force=false package_id=equivalent v1.0.2 target="equivalent"}: cargo::core::compiler::fingerprint: fingerprint error for equivalent v1.0.2/Check { test: false }/TargetInner { ..: lib_target("equivalent", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/equivalent-1.0.2/src/lib.rs", Edition2015) }
+   0.080952084s  INFO prepare_target{force=false package_id=equivalent v1.0.2 target="equivalent"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/equivalent-244b546d15c40cff/lib-equivalent`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.081045125s  INFO prepare_target{force=false package_id=hashbrown v0.16.1 target="hashbrown"}: cargo::core::compiler::fingerprint: fingerprint error for hashbrown v0.16.1/Check { test: false }/TargetInner { ..: lib_target("hashbrown", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/hashbrown-0.16.1/src/lib.rs", Edition2021) }
+   0.081047709s  INFO prepare_target{force=false package_id=hashbrown v0.16.1 target="hashbrown"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/hashbrown-f8952c678af21fc8/lib-hashbrown`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: cargo::core::compiler::compile
+  10: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  11: cargo::ops::cargo_compile::compile_ws
+  12: cargo::ops::cargo_compile::compile_with_exec
+  13: cargo::ops::cargo_compile::compile
+  14: cargo::commands::check::exec
+  15: <cargo::cli::Exec>::exec
+  16: cargo::main
+  17: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  18: std::rt::lang_start::<()>::{closure#0}
+  19: std::rt::lang_start_internal
+  20: _main
+   0.081144292s  INFO prepare_target{force=false package_id=toml_write v0.1.2 target="toml_write"}: cargo::core::compiler::fingerprint: fingerprint error for toml_write v0.1.2/Check { test: false }/TargetInner { ..: lib_target("toml_write", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/toml_write-0.1.2/src/lib.rs", Edition2021) }
+   0.081147167s  INFO prepare_target{force=false package_id=toml_write v0.1.2 target="toml_write"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/toml_write-4fda59db19905385/lib-toml_write`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.081246667s  INFO prepare_target{force=false package_id=winnow v0.7.15 target="winnow"}: cargo::core::compiler::fingerprint: fingerprint error for winnow v0.7.15/Check { test: false }/TargetInner { ..: lib_target("winnow", ["lib"], "/Users/clovu/.cargo/registry/src/index.crates.io-1949cf8c6b5b557f/winnow-0.7.15/src/lib.rs", Edition2021) }
+   0.081250542s  INFO prepare_target{force=false package_id=winnow v0.7.15 target="winnow"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/winnow-de71c2e7ef873af0/lib-winnow`
+
+Caused by:
+    No such file or directory (os error 2)
+
+Stack backtrace:
+   0: std::backtrace::Backtrace::create
+   1: cargo_util::paths::read_bytes
+   2: cargo_util::paths::read
+   3: cargo::core::compiler::fingerprint::_compare_old_fingerprint
+   4: cargo::core::compiler::fingerprint::prepare_target
+   5: cargo::core::compiler::compile
+   6: cargo::core::compiler::compile
+   7: cargo::core::compiler::compile
+   8: cargo::core::compiler::compile
+   9: <cargo::core::compiler::build_runner::BuildRunner>::compile
+  10: cargo::ops::cargo_compile::compile_ws
+  11: cargo::ops::cargo_compile::compile_with_exec
+  12: cargo::ops::cargo_compile::compile
+  13: cargo::commands::check::exec
+  14: <cargo::cli::Exec>::exec
+  15: cargo::main
+  16: std::sys::backtrace::__rust_begin_short_backtrace::<fn(), ()>
+  17: std::rt::lang_start::<()>::{closure#0}
+  18: std::rt::lang_start_internal
+  19: _main
+   0.081425625s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint: fingerprint error for cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global)/Check { test: true }/TargetInner { name: "cargo-clean-global", doc: true, ..: with_path("/Users/clovu/projects/i/cargo-clean-global/src/main.rs", Edition2021) }
+   0.081429625s  INFO prepare_target{force=false package_id=cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global) target="cargo-clean-global"}: cargo::core::compiler::fingerprint:     err: failed to read `/Users/clovu/projects/i/cargo-clean-global/target/debug/.fingerprint/cargo-clean-global-3b3196b1efd73835/test-bin-cargo-clean-global`
 
 Caused by:
     No such file or directory (os error 2)
@@ -387,16 +1407,16 @@ Stack backtrace:
   14: std::rt::lang_start::<()>::{closure#0}
   15: std::rt::lang_start_internal
   16: _main
+   Compiling serde_core v1.0.228
    Compiling libc v0.2.183
+   Compiling proc-macro2 v1.0.106
+   Compiling serde v1.0.228
+   Compiling unicode-ident v1.0.24
+   Compiling quote v1.0.45
+    Checking utf8parse v0.2.2
+    Checking anstyle-query v1.1.5
+    Checking colorchoice v1.0.5
+    Checking equivalent v1.0.2
    Compiling portable-atomic v1.13.1
-   Compiling syn v2.0.117
-    Checking toml_edit v0.22.27
-    Checking console v0.15.11
-    Checking dirs-sys-next v0.1.2
-    Checking dirs-next v2.0.0
-    Checking toml v0.8.23
-    Checking indicatif v0.17.11
-   Compiling clap_derive v4.6.0
-    Checking clap v4.6.0
-    Checking cargo-clean-global v0.1.0 (/Users/clovu/projects/i/cargo-clean-global)
-    Finished `dev` profile [unoptimized + debuginfo] target(s) in 1.85s
+    Checking anstyle v1.0.14
+    Checking hashbrown v0.16.1

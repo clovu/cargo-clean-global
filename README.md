@@ -11,8 +11,12 @@ cargo clean-global
 ## Installation
 
 ```bash
-git clone <your-repo-url>
-cd cargo-clean-global
+cargo install cargo-clean-global
+```
+
+Install from a local checkout during development:
+
+```bash
 cargo install --path .
 ```
 
@@ -57,6 +61,12 @@ cargo clean-global --help
 ## Contribution
 
 Contributions of any kind are welcome! If you have ideas or suggestions, feel free to open an issue or submit a pull request.
+
+## Release Automation
+
+Pushing a version tag that matches `v<package-version>` runs the release workflow, builds the release artifacts, creates the GitHub Release, and publishes the crate to crates.io.
+
+Repository maintainers must configure the `CRATES_IO_TOKEN` GitHub Actions secret before using this flow.
 
 ## License
 
