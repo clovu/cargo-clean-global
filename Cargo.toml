@@ -1,6 +1,6 @@
 [package]
 name = "cargo-clean-global"
-version = "0.1.0"
+version = "1.0.0"
 authors=["Clover You <hi@clovu.me>"]
 edition = "2024"
 description = "A safe Cargo plugin that cleans target directories across local Cargo projects."
