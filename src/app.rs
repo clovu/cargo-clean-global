@@ -1,0 +1,296 @@
+use indicatif::{ProgressBar, ProgressDrawTarget, ProgressStyle};
+use std::collections::HashSet;
+use std::env;
+use std::io::{self, IsTerminal, Write};
+use std::path::PathBuf;
+use std::process::ExitCode;
+use std::time::Duration;
+
+use crate::cleanup::clean_projects;
+use crate::cli::Cli;
+use crate::discovery::discover_projects;
+use crate::paths::normalize_existing_directory;
+
+pub(crate) fn run(options: Cli) -> ExitCode {
+    let scan_roots = match prepare_scan_roots(&options) {
+        Ok(roots) if !roots.is_empty() => roots,
+        Ok(_) => {
+            eprintln!("error: no readable scan roots were found");
+            return ExitCode::from(2);
+        }
+        Err(message) => {
+            eprintln!("error: {message}");
+            return ExitCode::from(2);
+        }
+    };
+
+    println!("cargo-clean-global {}", env!("CARGO_PKG_VERSION"));
+    println!("Scanning {} root(s):", scan_roots.len());
+    for root in &scan_roots {
+        println!("  {}", root.display());
+    }
+
+    if options.dry_run {
+        println!("Dry run enabled: target directories will be reported but not deleted.");
+    }
+
+    let scan_progress = scan_spinner();
+    let mut discovery = discover_projects(&scan_roots);
+    discovery
+        .projects
+        .sort_by(|left, right| left.root.cmp(&right.root));
+    discovery
+        .errors
+        .sort_by(|left, right| left.path.cmp(&right.path));
+    finish_scan_progress(
+        &scan_progress,
+        discovery.projects.len(),
+        discovery.errors.len(),
+    );
+
+    for error in &discovery.errors {
+        eprintln!("[error] {} -> {}", error.path.display(), error.message);
+    }
+
+    match confirm_cleanup(&options, discovery.projects.len()) {
+        Ok(true) => {}
+        Ok(false) => {
+            println!("Cleanup cancelled.");
+            return ExitCode::SUCCESS;
+        }
+        Err(message) => {
+            eprintln!("error: {message}");
+            return ExitCode::from(2);
+        }
+    }
+
+    let clean_progress = cleanup_progress(discovery.projects.len(), options.dry_run);
+    let cleanup = clean_projects(&discovery.projects, options.dry_run, || {
+        clean_progress.inc(1);
+    });
+    finish_cleanup_progress(&clean_progress, &cleanup, options.dry_run);
+
+    for skipped in &cleanup.skipped_unsafe {
+        println!("[skipped] {} -> {}", skipped.root.display(), skipped.reason);
+    }
+
+    if options.dry_run {
+        for entry in &cleanup.dry_runs {
+            println!(
+                "[dry-run] {} -> {}",
+                entry.root.display(),
+                entry.target.display()
+            );
+        }
+    } else {
+        for entry in &cleanup.cleaned {
+            println!(
+                "[cleaned] {} -> {}",
+                entry.root.display(),
+                entry.target.display()
+            );
+        }
+    }
+
+    for error in &cleanup.errors {
+        eprintln!("[error] {} -> {}", error.path.display(), error.message);
+    }
+
+    let total_errors = discovery.errors.len() + cleanup.errors.len();
+    let effective_cleaned = if options.dry_run {
+        cleanup.dry_runs.len()
+    } else {
+        cleanup.cleaned.len()
+    };
+
+    println!();
+    println!("Summary:");
+    println!("  Cargo projects found: {}", discovery.projects.len());
+    if options.dry_run {
+        println!("  Would clean: {}", effective_cleaned);
+    } else {
+        println!("  Cleaned: {}", effective_cleaned);
+    }
+    println!(
+        "  Skipped (missing target): {}",
+        cleanup.skipped_missing_target
+    );
+    println!("  Skipped (safety rules): {}", cleanup.skipped_unsafe.len());
+    println!("  Errors: {}", total_errors);
+
+    if total_errors == 0 {
+        ExitCode::SUCCESS
+    } else {
+        ExitCode::from(1)
+    }
+}
+
+fn prepare_scan_roots(options: &Cli) -> Result<Vec<PathBuf>, String> {
+    let raw_roots = if options.roots.is_empty() {
+        default_scan_roots()
+    } else {
+        options.roots.clone()
+    };
+
+    let mut seen = HashSet::new();
+    let mut roots = Vec::new();
+
+    for root in raw_roots {
+        let normalized = match normalize_existing_directory(&root) {
+            Ok(path) => path,
+            Err(error) if !options.roots.is_empty() => {
+                return Err(format!("invalid scan root {}: {}", root.display(), error));
+            }
+            Err(_) => continue,
+        };
+
+        if seen.insert(normalized.clone()) {
+            roots.push(normalized);
+        }
+    }
+
+    roots.sort();
+    Ok(roots)
+}
+
+fn default_scan_roots() -> Vec<PathBuf> {
+    let mut roots = Vec::new();
+    let home = dirs_next::home_dir().and_then(|path| normalize_existing_directory(&path).ok());
+    let current = env::current_dir()
+        .ok()
+        .and_then(|path| normalize_existing_directory(&path).ok());
+
+    if let Some(home) = home {
+        roots.push(home.clone());
+
+        if let Some(current) = current {
+            if current != home && !current.starts_with(&home) {
+                roots.push(current);
+            }
+        }
+    } else if let Some(current) = current {
+        roots.push(current);
+    }
+
+    roots
+}
+
+fn confirm_cleanup(options: &Cli, project_count: usize) -> Result<bool, String> {
+    if options.dry_run || options.yes || project_count == 0 {
+        return Ok(true);
+    }
+
+    if !io::stdin().is_terminal() || !io::stderr().is_terminal() {
+        return Err(String::from(
+            "cleanup confirmation requires an interactive terminal; rerun with --yes to skip the prompt",
+        ));
+    }
+
+    prompt_for_confirmation(project_count)
+}
+
+fn prompt_for_confirmation(project_count: usize) -> Result<bool, String> {
+    eprint!("Proceed to clean {project_count} discovered Cargo project(s)? [y/N]: ");
+    io::stderr()
+        .flush()
+        .map_err(|error| format!("failed to flush confirmation prompt: {error}"))?;
+
+    let mut input = String::new();
+    io::stdin()
+        .read_line(&mut input)
+        .map_err(|error| format!("failed to read confirmation input: {error}"))?;
+
+    Ok(parse_confirmation_input(&input))
+}
+
+fn parse_confirmation_input(input: &str) -> bool {
+    matches!(input.trim().to_ascii_lowercase().as_str(), "y" | "yes")
+}
+
+fn scan_spinner() -> ProgressBar {
+    let progress = progress_bar(ProgressBar::new_spinner());
+    progress.set_style(
+        ProgressStyle::with_template("{spinner} {msg}")
+            .expect("valid scan progress style")
+            .tick_chars("|/-\\ "),
+    );
+    progress.set_message("Scanning Cargo projects...");
+    progress.enable_steady_tick(Duration::from_millis(100));
+    progress
+}
+
+fn cleanup_progress(total_projects: usize, dry_run: bool) -> ProgressBar {
+    let progress = progress_bar(ProgressBar::new(total_projects as u64));
+    progress.set_style(
+        ProgressStyle::with_template("[{elapsed_precise}] {bar:40.cyan/blue} {pos}/{len} {msg}")
+            .expect("valid cleanup progress style")
+            .progress_chars("##-"),
+    );
+    let action = if dry_run {
+        "Evaluating target directories..."
+    } else {
+        "Cleaning target directories..."
+    };
+    progress.set_message(action);
+    progress
+}
+
+fn progress_bar(progress: ProgressBar) -> ProgressBar {
+    if io::stderr().is_terminal() {
+        progress.set_draw_target(ProgressDrawTarget::stderr());
+    } else {
+        progress.set_draw_target(ProgressDrawTarget::hidden());
+    }
+    progress
+}
+
+fn finish_scan_progress(progress: &ProgressBar, project_count: usize, error_count: usize) {
+    let message =
+        format!("Scan complete: found {project_count} Cargo project(s), {error_count} error(s)");
+    progress.finish_with_message(message);
+}
+
+fn finish_cleanup_progress(
+    progress: &ProgressBar,
+    cleanup: &crate::types::CleanupReport,
+    dry_run: bool,
+) {
+    let completed = if dry_run {
+        cleanup.dry_runs.len()
+    } else {
+        cleanup.cleaned.len()
+    };
+    let action = if dry_run { "Evaluation" } else { "Cleanup" };
+    let message = format!(
+        "{action} complete: processed {}, completed {}, errors {}",
+        cleanup.cleaned.len()
+            + cleanup.dry_runs.len()
+            + cleanup.skipped_missing_target
+            + cleanup.skipped_unsafe.len()
+            + cleanup.errors.len(),
+        completed,
+        cleanup.errors.len()
+    );
+    progress.finish_with_message(message);
+}
+
+#[cfg(test)]
+mod tests {
+    use super::parse_confirmation_input;
+
+    #[test]
+    fn accepts_yes_confirmation() {
+        assert!(parse_confirmation_input("y"));
+        assert!(parse_confirmation_input("Y"));
+        assert!(parse_confirmation_input("yes"));
+        assert!(parse_confirmation_input(" Yes \n"));
+    }
+
+    #[test]
+    fn rejects_non_yes_confirmation() {
+        assert!(!parse_confirmation_input(""));
+        assert!(!parse_confirmation_input("n"));
+        assert!(!parse_confirmation_input("no"));
+        assert!(!parse_confirmation_input("maybe"));
+    }
+}
