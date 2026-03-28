@@ -1,7 +1,8 @@
 use std::ffi::OsString;
 use std::path::PathBuf;
 
-use clap::{Parser, ValueHint};
+use clap::Parser;
+use clap::ValueHint;
 
 const SUBCOMMAND_NAME: &str = "clean-global";
 const DIRECT_INVOCATION_MESSAGE: &str = "run this tool as `cargo clean-global`; direct `cargo-clean-global` invocation is not supported";
@@ -63,7 +64,8 @@ fn has_cargo_forwarded_subcommand(args: &[OsString]) -> bool {
 
 #[cfg(test)]
 mod tests {
-    use super::{Cli, normalize_args};
+    use super::Cli;
+    use super::normalize_args;
     use clap::Parser;
     use std::path::PathBuf;
 

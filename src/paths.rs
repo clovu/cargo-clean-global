@@ -2,7 +2,8 @@ use std::env;
 use std::ffi::OsStr;
 use std::fs;
 use std::io;
-use std::path::{Path, PathBuf};
+use std::path::Path;
+use std::path::PathBuf;
 
 use crate::types::PathError;
 
@@ -44,9 +45,21 @@ pub(crate) fn should_skip_dir(name: &OsStr) -> bool {
         TARGET_DIR_NAME,
     ];
 
+    const COMMON_SKIPS_PREFIXES: &[&str] = &[
+        // Common hidden directories on Unix-like systems
+        ".",
+    ];
+
     if COMMON_SKIPS
         .iter()
         .any(|candidate| name.eq_ignore_ascii_case(candidate))
+    {
+        return true;
+    }
+
+    if COMMON_SKIPS_PREFIXES
+        .iter()
+        .any(|prefix| name.starts_with(prefix))
     {
         return true;
     }
@@ -82,10 +95,18 @@ pub(crate) fn cargo_home_dir() -> Option<PathBuf> {
 
 #[cfg(test)]
 mod tests {
+    use crate::paths::should_skip_dir;
+
     use super::cargo_home_dir;
     use std::ffi::OsString;
     use std::path::PathBuf;
-    use std::sync::{Mutex, OnceLock};
+    use std::sync::Mutex;
+    use std::sync::OnceLock;
+
+    #[test]
+    fn should_skip_specified_prefix_dir() {
+        assert!(should_skip_dir(&OsString::from(".Trash")));
+    }
 
     #[test]
     fn cargo_home_dir_prefers_env_var() {

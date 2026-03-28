@@ -54,6 +54,15 @@ Restrict scanning to multiple directories:
 cargo clean-global --root ~/projects --root /work/rust
 ```
 
+By default, scanner skips hidden directories whose names start with `.`.
+If your Rust project is inside a hidden directory, explicitly pass that path with `--root`.
+
+Example:
+
+```bash
+cargo clean-global --root ~/.config/my-rust-projects
+```
+
 Show help:
 
 ```bash
