@@ -42,6 +42,11 @@ where
 {
     let mut args: Vec<OsString> = args.into_iter().map(Into::into).collect();
 
+    if cfg!(debug_assertions) {
+        // In debug mode, allow bypassing the cargo invocation requirement for easier testing.
+        return Ok(args);
+    }
+
     if invoked_via_cargo && has_cargo_forwarded_subcommand(&args) {
         args.remove(1);
         return Ok(args);
@@ -51,10 +56,6 @@ where
 }
 
 fn has_cargo_forwarded_subcommand(args: &[OsString]) -> bool {
-    if cfg!(debug_assertions) {
-        // In debug mode, allow bypassing the cargo invocation requirement for easier testing.
-        return true;
-    }
     if args.len() < 2 {
         return false;
     }
