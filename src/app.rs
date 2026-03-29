@@ -42,7 +42,7 @@ pub(crate) fn run(options: Cli) -> ExitCode {
     }
 
     if options.dry_run {
-        println!("Dry run enabled: target directories will be reported but not deleted.");
+        println!("Dry run enabled: target directories will be reported but not deleted.\n");
     }
 
     let scan_progress = scan_spinner();
@@ -93,7 +93,12 @@ pub(crate) fn run(options: Cli) -> ExitCode {
     );
 
     for error in &discovery.errors {
-        eprintln!("[error] {} -> {}", error.path.display(), error.message);
+        eprintln!(
+            "{} {} -> {}",
+            console::style("[error]").red(),
+            error.path.display(),
+            error.message
+        );
     }
 
     match confirm_cleanup(&options, discovery.projects.len()) {
@@ -108,7 +113,7 @@ pub(crate) fn run(options: Cli) -> ExitCode {
         }
     }
 
-    println!("🧹 Cleaning projects...");
+    println!("\n🧹 Cleaning projects...\n");
     let clean_progress = cleanup_progress(discovery.projects.len(), options.dry_run);
     let cleanup = clean_projects(&discovery.projects, options.dry_run, |project, report| {
         clean_progress.inc(1);
@@ -403,7 +408,7 @@ fn finish_cleanup_progress(
     let freed_bytes = cleaned_size_bytes(cleanup, dry_run);
     let action = if dry_run { "Evaluation" } else { "Cleanup" };
     let message = format!(
-        "{action} complete: processed {}, cleaned {}, freed {}, errors {}",
+        "{action} complete:\nprocessed {}, cleaned {}, freed {}, errors {}\n",
         cleanup.cleaned.len()
             + cleanup.dry_runs.len()
             + cleanup.skipped_missing_target
