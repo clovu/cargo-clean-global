@@ -35,14 +35,16 @@ pub(crate) fn run(options: Cli) -> ExitCode {
         }
     };
 
-    println!("cargo-clean-global {}", env!("CARGO_PKG_VERSION"));
-    println!("Scanning root(s):");
-    for root in &scan_roots {
-        println!("  {}", root.display());
-    }
+    println!("cargo-clean-global {}\n", env!("CARGO_PKG_VERSION"));
 
     if options.dry_run {
-        println!("Dry run enabled: target directories will be reported but not deleted.\n");
+        // println!("Dry run enabled: target directories will be reported but not deleted.\n");
+        println!("🧪 Dry run mode — no files will be deleted\n")
+    }
+
+    println!("Scanning root(s):");
+    for root in &scan_roots {
+        println!("  {}\n", root.display());
     }
 
     let scan_progress = scan_spinner();
@@ -92,14 +94,16 @@ pub(crate) fn run(options: Cli) -> ExitCode {
         scan_state.borrow().target_total_bytes,
     );
 
-    for error in &discovery.errors {
-        eprintln!(
-            "{} {} -> {}",
-            console::style("[error]").red(),
-            error.path.display(),
-            error.message
+    if !discovery.errors.is_empty() {
+        println!(
+            "{}",
+            console::style(format!("\n⚠️ Errors ({}):", discovery.errors.len())).red()
         );
     }
+
+    discovery.errors.iter().for_each(|item| {
+        eprintln!("  - {}: {}", item.path.display(), item.message);
+    });
 
     match confirm_cleanup(&options, discovery.projects.len()) {
         Ok(true) => {}
@@ -133,37 +137,44 @@ pub(crate) fn run(options: Cli) -> ExitCode {
             .unwrap_or_else(|_| String::from("<target unresolved>"));
 
         clean_progress.set_message(format!(
-            "{action_label}: {cleaned_count}  freed: {}  crate: {}  target: {target}",
+            "{action_label}: {cleaned_count}  freed: {}\n  - project: {}\n  - target: {target}",
             format_bytes(freed_bytes),
             project.root.display(),
         ));
     });
     finish_cleanup_progress(&clean_progress, &cleanup, options.dry_run);
 
-    for skipped in &cleanup.skipped_unsafe {
-        println!("[skipped] {} -> {}", skipped.root.display(), skipped.reason);
+    if !cleanup.skipped_unsafe.is_empty() {
+        println!(
+            "{} {}",
+            console::style("⚠️ Skipped unsafe cleanups:").yellow(),
+            cleanup.skipped_unsafe.len()
+        );
     }
+
+    cleanup.skipped_unsafe.iter().for_each(|item| {
+        eprintln!("  - {} -> {}", item.root.display(), item.reason);
+    });
 
     if options.dry_run {
-        for entry in &cleanup.dry_runs {
-            println!(
-                "[dry-run] {} -> {}",
-                entry.root.display(),
-                entry.target.display()
-            );
+        if !cleanup.dry_runs.is_empty() {
+            println!("{}", console::style("🧪 Dry-run results").green());
         }
+
+        cleanup.dry_runs.iter().for_each(|item| {
+            eprintln!("  - {} -> {}", item.root.display(), item.target.display());
+        });
     } else {
-        for entry in &cleanup.cleaned {
-            println!(
-                "[cleaned] {} -> {}",
-                entry.root.display(),
-                entry.target.display()
-            );
-        }
+        cleanup.cleaned.iter().for_each(|item| {
+            println!("  - {} -> {}", item.root.display(), item.target.display());
+        });
     }
 
-    for error in &cleanup.errors {
-        eprintln!("[error] {} -> {}", error.path.display(), error.message);
+    if !cleanup.errors.is_empty() {
+        println!("{}", console::style("❌ Cleanup Errors:").red());
+        for error in &cleanup.errors {
+            eprintln!("  - {} -> {}", error.path.display(), error.message);
+        }
     }
 
     let total_errors = discovery.errors.len() + cleanup.errors.len();
@@ -175,11 +186,19 @@ pub(crate) fn run(options: Cli) -> ExitCode {
 
     println!();
     println!("Summary:");
-    println!("  Cargo projects found: {}", discovery.projects.len());
+    println!("  Found: {} projects", discovery.projects.len());
     if options.dry_run {
-        println!("  Would clean: {}", effective_cleaned);
+        println!(
+            "  Would clean: {} ({})",
+            effective_cleaned,
+            format_bytes(cleaned_size_bytes(&cleanup, options.dry_run))
+        );
     } else {
-        println!("  Cleaned: {}", effective_cleaned);
+        println!(
+            "  Cleaned: {} ({})",
+            effective_cleaned,
+            format_bytes(cleaned_size_bytes(&cleanup, options.dry_run))
+        );
     }
     println!(
         "  Skipped (missing target): {}",
@@ -368,7 +387,7 @@ fn cleanup_progress(total_projects: usize, dry_run: bool) -> ProgressBar {
     } else {
         "Cleaning target directories..."
     };
-    progress.set_message(action.to_owned() + dry_run.to_string().as_str());
+    progress.set_message(action);
     progress
 }
 
@@ -388,7 +407,7 @@ fn finish_scan_progress(
     target_total_bytes: u64,
 ) {
     let message = format!(
-        "{} Scan complete: found {project_count} Cargo project(s), target total {}, errors {error_count}",
+        "{} Scan complete: found {project_count} Cargo project(s), target total {}, errors {error_count}\n",
         console::style("✔").green(),
         format_bytes(target_total_bytes),
     );
