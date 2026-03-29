@@ -42,13 +42,18 @@ where
 {
     let mut args: Vec<OsString> = args.into_iter().map(Into::into).collect();
 
-    if cfg!(debug_assertions) {
-        // In debug mode, allow bypassing the cargo invocation requirement for easier testing.
+    if invoked_via_cargo && has_cargo_forwarded_subcommand(&args) {
+        args.remove(1);
         return Ok(args);
     }
 
-    if invoked_via_cargo && has_cargo_forwarded_subcommand(&args) {
-        args.remove(1);
+    if cfg!(debug_assertions) {
+        // In debug mode, allow direct invocation for easier local testing.
+        // Still reject spoofed forwarded subcommand names when not invoked by cargo.
+        if has_cargo_forwarded_subcommand(&args) {
+            return Err(DIRECT_INVOCATION_MESSAGE);
+        }
+
         return Ok(args);
     }
 
@@ -111,7 +116,11 @@ mod tests {
 
     #[test]
     fn rejects_direct_binary_invocation() {
-        assert!(normalize_args(["cargo-clean-global", "--dry-run"], false).is_err());
+        if cfg!(debug_assertions) {
+            assert!(normalize_args(["cargo-clean-global", "--dry-run"], false).is_ok());
+        } else {
+            assert!(normalize_args(["cargo-clean-global", "--dry-run"], false).is_err());
+        }
     }
 
     #[test]
