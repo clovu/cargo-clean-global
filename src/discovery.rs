@@ -1,29 +1,51 @@
 use std::collections::HashSet;
 use std::ffi::OsStr;
 use std::fs;
-use std::path::{Path, PathBuf};
+use std::path::Path;
+use std::path::PathBuf;
 
 use crate::manifest::looks_like_cargo_manifest;
-use crate::paths::{normalize_existing_directory, path_error, should_skip_dir};
-use crate::types::{CargoProject, DiscoveryResult};
+use crate::paths::normalize_existing_directory;
+use crate::paths::path_error;
+use crate::paths::should_skip_dir;
+use crate::types::CargoProject;
+use crate::types::DiscoveryResult;
 
 const MANIFEST_NAME: &str = "Cargo.toml";
 
-pub(crate) fn discover_projects(scan_roots: &[PathBuf]) -> DiscoveryResult {
+pub(crate) fn discover_projects(
+    scan_roots: &[PathBuf],
+    mut on_scan: impl FnMut(&PathBuf, &PathBuf, usize),
+    mut on_project_found: impl FnMut(&CargoProject),
+) -> DiscoveryResult {
     let mut seen_roots = HashSet::new();
     let mut result = DiscoveryResult::default();
 
     for root in scan_roots {
-        scan_directory(root, &mut seen_roots, &mut result);
+        scan_directory(
+            root,
+            &mut seen_roots,
+            &mut result,
+            &mut on_scan,
+            &mut on_project_found,
+        );
     }
 
     result
 }
 
-fn scan_directory(root: &Path, seen_roots: &mut HashSet<PathBuf>, result: &mut DiscoveryResult) {
-    let mut stack = vec![root.to_path_buf()];
+fn scan_directory(
+    root: &Path,
+    seen_roots: &mut HashSet<PathBuf>,
+    result: &mut DiscoveryResult,
+    on_scan: &mut impl FnMut(&PathBuf, &PathBuf, usize),
+    on_project_found: &mut impl FnMut(&CargoProject),
+) {
+    let root_path = root.to_path_buf();
+    let mut stack = vec![root_path.clone()];
 
     while let Some(current_dir) = stack.pop() {
+        on_scan(&root_path, &current_dir, result.projects.len());
         let entries = match fs::read_dir(&current_dir) {
             Ok(entries) => entries,
             Err(error) => {
@@ -87,10 +109,12 @@ fn scan_directory(root: &Path, seen_roots: &mut HashSet<PathBuf>, result: &mut D
                     let project_root = normalize_existing_directory(&current_dir)
                         .unwrap_or_else(|_| current_dir.clone());
                     if seen_roots.insert(project_root.clone()) {
-                        result.projects.push(CargoProject {
+                        let project = CargoProject {
                             root: project_root,
                             manifest: manifest_path,
-                        });
+                        };
+                        on_project_found(&project);
+                        result.projects.push(project);
                     }
                 }
                 Ok(false) => {}

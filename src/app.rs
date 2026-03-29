@@ -1,15 +1,26 @@
-use indicatif::{ProgressBar, ProgressDrawTarget, ProgressStyle};
+use indicatif::ProgressBar;
+use indicatif::ProgressDrawTarget;
+use indicatif::ProgressStyle;
+use std::cell::RefCell;
 use std::collections::HashSet;
 use std::env;
-use std::io::{self, IsTerminal, Write};
+use std::fs;
+use std::io::IsTerminal;
+use std::io::Write;
+use std::io::{self};
+use std::path::Path;
 use std::path::PathBuf;
 use std::process::ExitCode;
+use std::rc::Rc;
 use std::time::Duration;
 
 use crate::cleanup::clean_projects;
 use crate::cli::Cli;
+use crate::config::resolve_target_dir;
 use crate::discovery::discover_projects;
 use crate::paths::normalize_existing_directory;
+use crate::types::CargoProject;
+use crate::types::CleanupReport;
 
 pub(crate) fn run(options: Cli) -> ExitCode {
     let scan_roots = match prepare_scan_roots(&options) {
@@ -25,7 +36,7 @@ pub(crate) fn run(options: Cli) -> ExitCode {
     };
 
     println!("cargo-clean-global {}", env!("CARGO_PKG_VERSION"));
-    println!("Scanning {} root(s):", scan_roots.len());
+    println!("Scanning root(s):");
     for root in &scan_roots {
         println!("  {}", root.display());
     }
@@ -35,7 +46,39 @@ pub(crate) fn run(options: Cli) -> ExitCode {
     }
 
     let scan_progress = scan_spinner();
-    let mut discovery = discover_projects(&scan_roots);
+    scan_progress.enable_steady_tick(Duration::from_millis(80));
+
+    let scan_state = Rc::new(RefCell::new(ScanProgressState::default()));
+    let scan_state_for_found = Rc::clone(&scan_state);
+    let mut discovery = discover_projects(
+        &scan_roots,
+        |root, path, found_count| {
+            let root_label = scan_roots
+                .iter()
+                .position(|candidate| candidate == root)
+                .map(|index| {
+                    format!(
+                        "[root {}/{}] {}",
+                        index + 1,
+                        scan_roots.len(),
+                        root.display()
+                    )
+                })
+                .unwrap_or_else(|| root.display().to_string());
+            let target_total = format_bytes(scan_state.borrow().target_total_bytes);
+            scan_progress.set_message(format!(
+                "{root_label} Scanning crates...  found: {}  target: {} \n {} ",
+                found_count,
+                target_total,
+                path.display()
+            ));
+        },
+        |project| {
+            if let Some(target_size) = target_size_bytes_for_project(project) {
+                scan_state_for_found.borrow_mut().target_total_bytes += target_size;
+            }
+        },
+    );
     discovery
         .projects
         .sort_by(|left, right| left.root.cmp(&right.root));
@@ -46,6 +89,7 @@ pub(crate) fn run(options: Cli) -> ExitCode {
         &scan_progress,
         discovery.projects.len(),
         discovery.errors.len(),
+        scan_state.borrow().target_total_bytes,
     );
 
     for error in &discovery.errors {
@@ -64,9 +108,30 @@ pub(crate) fn run(options: Cli) -> ExitCode {
         }
     }
 
+    println!("🧹 Cleaning projects...");
     let clean_progress = cleanup_progress(discovery.projects.len(), options.dry_run);
-    let cleanup = clean_projects(&discovery.projects, options.dry_run, || {
+    let cleanup = clean_projects(&discovery.projects, options.dry_run, |project, report| {
         clean_progress.inc(1);
+        let action_label = if options.dry_run {
+            "would clean"
+        } else {
+            "cleaned"
+        };
+        let cleaned_count = if options.dry_run {
+            report.dry_runs.len()
+        } else {
+            report.cleaned.len()
+        };
+        let freed_bytes = cleaned_size_bytes(report, options.dry_run);
+        let target = resolve_target_dir(project)
+            .map(|path| path.display().to_string())
+            .unwrap_or_else(|_| String::from("<target unresolved>"));
+
+        clean_progress.set_message(format!(
+            "{action_label}: {cleaned_count}  freed: {}  crate: {}  target: {target}",
+            format_bytes(freed_bytes),
+            project.root.display(),
+        ));
     });
     finish_cleanup_progress(&clean_progress, &cleanup, options.dry_run);
 
@@ -123,6 +188,72 @@ pub(crate) fn run(options: Cli) -> ExitCode {
     } else {
         ExitCode::from(1)
     }
+}
+
+fn format_bytes(bytes: u64) -> String {
+    const UNITS: [&str; 5] = ["B", "KB", "MB", "GB", "TB"];
+
+    let mut value = bytes as f64;
+    let mut unit_index = 0;
+    while value >= 1024.0 && unit_index < UNITS.len() - 1 {
+        value /= 1024.0;
+        unit_index += 1;
+    }
+
+    if unit_index == 0 {
+        format!("{bytes} {}", UNITS[unit_index])
+    } else {
+        format!("{value:.1} {}", UNITS[unit_index])
+    }
+}
+
+#[derive(Default)]
+struct ScanProgressState {
+    target_total_bytes: u64,
+}
+
+fn cleaned_size_bytes(report: &CleanupReport, dry_run: bool) -> u64 {
+    let entries = if dry_run {
+        &report.dry_runs
+    } else {
+        &report.cleaned
+    };
+
+    entries
+        .iter()
+        .map(|entry| entry.size_bytes)
+        .fold(0_u64, |total, value| total.saturating_add(value))
+}
+
+fn target_size_bytes_for_project(project: &CargoProject) -> Option<u64> {
+    let target = resolve_target_dir(project).ok()?;
+    let metadata = fs::symlink_metadata(&target).ok()?;
+    if metadata.file_type().is_symlink() || !metadata.is_dir() {
+        return None;
+    }
+
+    let canonical_target = fs::canonicalize(&target).ok()?;
+    directory_size_bytes(&canonical_target).ok()
+}
+
+fn directory_size_bytes(path: &Path) -> io::Result<u64> {
+    let mut total = 0_u64;
+    let mut stack = vec![path.to_path_buf()];
+
+    while let Some(current) = stack.pop() {
+        let entries = fs::read_dir(&current)?;
+        for entry in entries {
+            let entry = entry?;
+            let metadata = entry.metadata()?;
+            if metadata.is_dir() {
+                stack.push(entry.path());
+            } else if metadata.is_file() {
+                total = total.saturating_add(metadata.len());
+            }
+        }
+    }
+
+    Ok(total)
 }
 
 fn prepare_scan_roots(options: &Cli) -> Result<Vec<PathBuf>, String> {
@@ -213,10 +344,10 @@ fn scan_spinner() -> ProgressBar {
     progress.set_style(
         ProgressStyle::with_template("{spinner} {msg}")
             .expect("valid scan progress style")
-            .tick_chars("|/-\\ "),
+            .tick_chars("⠋⠙⠹⠸⠼⠴⠦⠧⠇⠏ "),
     );
     progress.set_message("Scanning Cargo projects...");
-    progress.enable_steady_tick(Duration::from_millis(100));
+    progress.enable_steady_tick(Duration::from_millis(80));
     progress
 }
 
@@ -232,7 +363,7 @@ fn cleanup_progress(total_projects: usize, dry_run: bool) -> ProgressBar {
     } else {
         "Cleaning target directories..."
     };
-    progress.set_message(action);
+    progress.set_message(action.to_owned() + dry_run.to_string().as_str());
     progress
 }
 
@@ -245,9 +376,17 @@ fn progress_bar(progress: ProgressBar) -> ProgressBar {
     progress
 }
 
-fn finish_scan_progress(progress: &ProgressBar, project_count: usize, error_count: usize) {
-    let message =
-        format!("Scan complete: found {project_count} Cargo project(s), {error_count} error(s)");
+fn finish_scan_progress(
+    progress: &ProgressBar,
+    project_count: usize,
+    error_count: usize,
+    target_total_bytes: u64,
+) {
+    let message = format!(
+        "{} Scan complete: found {project_count} Cargo project(s), target total {}, errors {error_count}",
+        console::style("✔").green(),
+        format_bytes(target_total_bytes),
+    );
     progress.finish_with_message(message);
 }
 
@@ -261,15 +400,17 @@ fn finish_cleanup_progress(
     } else {
         cleanup.cleaned.len()
     };
+    let freed_bytes = cleaned_size_bytes(cleanup, dry_run);
     let action = if dry_run { "Evaluation" } else { "Cleanup" };
     let message = format!(
-        "{action} complete: processed {}, completed {}, errors {}",
+        "{action} complete: processed {}, cleaned {}, freed {}, errors {}",
         cleanup.cleaned.len()
             + cleanup.dry_runs.len()
             + cleanup.skipped_missing_target
             + cleanup.skipped_unsafe.len()
             + cleanup.errors.len(),
         completed,
+        format_bytes(freed_bytes),
         cleanup.errors.len()
     );
     progress.finish_with_message(message);

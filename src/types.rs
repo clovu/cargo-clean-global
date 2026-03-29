@@ -16,6 +16,7 @@ pub(crate) struct PathError {
 pub(crate) struct CleanedProject {
     pub(crate) root: PathBuf,
     pub(crate) target: PathBuf,
+    pub(crate) size_bytes: u64,
 }
 
 #[derive(Debug, Clone)]

@@ -51,6 +51,10 @@ where
 }
 
 fn has_cargo_forwarded_subcommand(args: &[OsString]) -> bool {
+    if cfg!(debug_assertions) {
+        // In debug mode, allow bypassing the cargo invocation requirement for easier testing.
+        return true;
+    }
     if args.len() < 2 {
         return false;
     }

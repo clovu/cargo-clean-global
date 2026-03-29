@@ -1,12 +1,16 @@
 use std::fs;
 use std::io;
+use std::path::Path;
 
 use crate::config::resolve_target_dir;
 use crate::manifest::looks_like_cargo_manifest;
 use crate::paths::path_error;
-use crate::types::{
-    CargoProject, CleanedProject, CleanupReport, CleanupStatus, PathError, SkippedProject,
-};
+use crate::types::CargoProject;
+use crate::types::CleanedProject;
+use crate::types::CleanupReport;
+use crate::types::CleanupStatus;
+use crate::types::PathError;
+use crate::types::SkippedProject;
 
 pub(crate) fn clean_projects<F>(
     projects: &[CargoProject],
@@ -14,7 +18,7 @@ pub(crate) fn clean_projects<F>(
     mut on_project_finished: F,
 ) -> CleanupReport
 where
-    F: FnMut(),
+    F: FnMut(&CargoProject, &CleanupReport),
 {
     let mut report = CleanupReport::default();
 
@@ -27,7 +31,7 @@ where
             Err(error) => report.errors.push(error),
         }
 
-        on_project_finished();
+        on_project_finished(project, &report);
     }
 
     report
@@ -100,9 +104,17 @@ fn clean_project(project: &CargoProject, dry_run: bool) -> Result<CleanupStatus,
         }
     }
 
+    let size_bytes = directory_size_bytes(&canonical_target).map_err(|error| {
+        path_error(
+            project.root.clone(),
+            format!("failed to calculate size of {}: {}", canonical_target.display(), error),
+        )
+    })?;
+
     let cleaned = CleanedProject {
         root: project.root.clone(),
         target: canonical_target,
+        size_bytes,
     };
 
     if dry_run {
@@ -117,4 +129,24 @@ fn clean_project(project: &CargoProject, dry_run: bool) -> Result<CleanupStatus,
     })?;
 
     Ok(CleanupStatus::Cleaned(cleaned))
+}
+
+fn directory_size_bytes(path: &Path) -> io::Result<u64> {
+    let mut total = 0_u64;
+    let mut stack = vec![path.to_path_buf()];
+
+    while let Some(current) = stack.pop() {
+        let entries = fs::read_dir(&current)?;
+        for entry in entries {
+            let entry = entry?;
+            let metadata = entry.metadata()?;
+            if metadata.is_dir() {
+                stack.push(entry.path());
+            } else if metadata.is_file() {
+                total = total.saturating_add(metadata.len());
+            }
+        }
+    }
+
+    Ok(total)
 }
