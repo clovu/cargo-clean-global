@@ -107,7 +107,11 @@ fn clean_project(project: &CargoProject, dry_run: bool) -> Result<CleanupStatus,
     let size_bytes = directory_size_bytes(&canonical_target).map_err(|error| {
         path_error(
             project.root.clone(),
-            format!("failed to calculate size of {}: {}", canonical_target.display(), error),
+            format!(
+                "failed to calculate size of {}: {}",
+                canonical_target.display(),
+                error
+            ),
         )
     })?;
 
