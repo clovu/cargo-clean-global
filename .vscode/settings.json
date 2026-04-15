@@ -12,6 +12,7 @@
   "rust-analyzer.inlayHints.typeHints.enable": false,
   "cSpell.words": [
     "dotenv",
-    "indicatif"
+    "indicatif",
+    "pathbuf"
   ],
 }
