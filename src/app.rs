@@ -16,8 +16,10 @@ use std::time::Duration;
 
 use crate::cleanup::clean_projects;
 use crate::cli::Cli;
+use crate::config::resolve_default_scan_roots_from_global_config;
 use crate::config::resolve_target_dir;
 use crate::discovery::discover_projects;
+use crate::paths::expand_tilde;
 use crate::paths::normalize_existing_directory;
 use crate::types::CargoProject;
 use crate::types::CleanupReport;
@@ -281,17 +283,19 @@ fn directory_size_bytes(path: &Path) -> io::Result<u64> {
 }
 
 fn prepare_scan_roots(options: &Cli) -> Result<Vec<PathBuf>, String> {
-    let raw_roots = if options.roots.is_empty() {
-        default_scan_roots()
+    let config_roots = if options.roots.is_empty() {
+        resolve_default_scan_roots_from_global_config().map_err(|error| error.message)?
     } else {
-        options.roots.clone()
+        vec![]
     };
+
+    let raw_roots = select_raw_scan_roots(options, config_roots);
 
     let mut seen = HashSet::new();
     let mut roots = Vec::new();
 
     for root in raw_roots {
-        let normalized = match normalize_existing_directory(&root) {
+        let normalized = match normalize_existing_directory(&expand_tilde(&root)) {
             Ok(path) => path,
             Err(error) if !options.roots.is_empty() => {
                 return Err(format!("invalid scan root {}: {}", root.display(), error));
@@ -306,6 +310,18 @@ fn prepare_scan_roots(options: &Cli) -> Result<Vec<PathBuf>, String> {
 
     roots.sort();
     Ok(roots)
+}
+
+fn select_raw_scan_roots(options: &Cli, config_roots: Vec<PathBuf>) -> Vec<PathBuf> {
+    if !options.roots.is_empty() {
+        return options.roots.clone();
+    }
+
+    if !config_roots.is_empty() {
+        return config_roots;
+    }
+
+    default_scan_roots()
 }
 
 fn default_scan_roots() -> Vec<PathBuf> {
@@ -442,7 +458,18 @@ fn finish_cleanup_progress(
 
 #[cfg(test)]
 mod tests {
+    use super::default_scan_roots;
     use super::parse_confirmation_input;
+    use super::prepare_scan_roots;
+    use super::select_raw_scan_roots;
+    use crate::cli::Cli;
+    use std::ffi::OsString;
+    use std::fs;
+    use std::path::PathBuf;
+    use std::sync::Mutex;
+    use std::sync::OnceLock;
+    use std::time::SystemTime;
+    use std::time::UNIX_EPOCH;
 
     #[test]
     fn accepts_yes_confirmation() {
@@ -458,5 +485,127 @@ mod tests {
         assert!(!parse_confirmation_input("n"));
         assert!(!parse_confirmation_input("no"));
         assert!(!parse_confirmation_input("maybe"));
+    }
+
+    #[test]
+    fn prepare_scan_roots_prefers_cli_roots_over_config_defaults() {
+        let _guard = env_lock()
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+
+        let base = unique_test_dir("prepare_scan_roots_prefers_cli_roots_over_config_defaults");
+        let cli_root = base.join("cli-root");
+        let config_root = base.join("config-root");
+        let cargo_home = base.join("cargo-home");
+
+        fs::create_dir_all(&cli_root).expect("should create cli root");
+        fs::create_dir_all(&config_root).expect("should create config root");
+        fs::create_dir_all(&cargo_home).expect("should create cargo home");
+        fs::write(
+            cargo_home.join("config.toml"),
+            format!(
+                "[cargo-clean-global]\nroots = \"{}\"\n",
+                config_root.display()
+            ),
+        )
+        .expect("should write global Cargo config");
+
+        let expected = fs::canonicalize(&cli_root).expect("cli root should canonicalize");
+
+        let original = std::env::var_os("CARGO_HOME");
+        unsafe {
+            std::env::set_var("CARGO_HOME", &cargo_home);
+        }
+
+        let options = Cli {
+            dry_run: false,
+            yes: false,
+            roots: vec![cli_root.clone()],
+        };
+
+        let roots = prepare_scan_roots(&options).expect("cli roots should be used");
+
+        restore_cargo_home(original);
+        let _ = fs::remove_dir_all(&base);
+
+        assert_eq!(roots, vec![expected]);
+    }
+
+    #[test]
+    fn prepare_scan_roots_uses_config_defaults_when_cli_roots_empty() {
+        let _guard = env_lock()
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+
+        let base = unique_test_dir("prepare_scan_roots_uses_config_defaults_when_cli_roots_empty");
+        let config_root = base.join("config-root");
+        let cargo_home = base.join("cargo-home");
+
+        fs::create_dir_all(&config_root).expect("should create config root");
+        fs::create_dir_all(&cargo_home).expect("should create cargo home");
+        fs::write(
+            cargo_home.join("config.toml"),
+            format!(
+                "[cargo-clean-global]\nroots = [\"{}\"]\n",
+                config_root.display()
+            ),
+        )
+        .expect("should write global Cargo config");
+
+        let expected = fs::canonicalize(&config_root).expect("config root should canonicalize");
+
+        let original = std::env::var_os("CARGO_HOME");
+        unsafe {
+            std::env::set_var("CARGO_HOME", &cargo_home);
+        }
+
+        let options = Cli {
+            dry_run: false,
+            yes: false,
+            roots: vec![],
+        };
+
+        let roots = prepare_scan_roots(&options).expect("config default roots should be used");
+
+        restore_cargo_home(original);
+        let _ = fs::remove_dir_all(&base);
+
+        assert_eq!(roots, vec![expected]);
+    }
+
+    #[test]
+    fn prepare_scan_roots_falls_back_to_builtin_defaults_when_config_roots_empty() {
+        let options = Cli {
+            dry_run: false,
+            yes: false,
+            roots: vec![],
+        };
+
+        let selected = select_raw_scan_roots(&options, vec![]);
+        let fallback = default_scan_roots();
+
+        assert_eq!(selected, fallback);
+    }
+
+    fn restore_cargo_home(original: Option<OsString>) {
+        unsafe {
+            match original {
+                Some(value) => std::env::set_var("CARGO_HOME", value),
+                None => std::env::remove_var("CARGO_HOME"),
+            }
+        }
+    }
+
+    fn env_lock() -> &'static Mutex<()> {
+        static ENV_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
+        ENV_LOCK.get_or_init(|| Mutex::new(()))
+    }
+
+    fn unique_test_dir(name: &str) -> PathBuf {
+        let nanos = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("time should move forward")
+            .as_nanos();
+        std::env::temp_dir().join(format!("cargo-clean-global-{name}-{nanos}"))
     }
 }

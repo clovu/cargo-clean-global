@@ -21,6 +21,16 @@ pub(crate) fn normalize_existing_directory(path: &Path) -> io::Result<PathBuf> {
     fs::canonicalize(path)
 }
 
+pub(crate) fn expand_tilde<P: AsRef<Path>>(path: P) -> PathBuf {
+    let path = path.as_ref();
+    if path.starts_with("~")
+        && let Some(home) = dirs_next::home_dir()
+    {
+        return home.join(path.strip_prefix("~").unwrap_or(path));
+    }
+    path.to_path_buf()
+}
+
 pub(crate) fn path_error(path: impl Into<PathBuf>, message: impl Into<String>) -> PathError {
     PathError {
         path: path.into(),
@@ -95,10 +105,12 @@ pub(crate) fn cargo_home_dir() -> Option<PathBuf> {
 
 #[cfg(test)]
 mod tests {
+    use crate::paths::expand_tilde;
     use crate::paths::should_skip_dir;
 
     use super::cargo_home_dir;
     use std::ffi::OsString;
+    use std::path::Path;
     use std::path::PathBuf;
     use std::sync::Mutex;
     use std::sync::OnceLock;
@@ -138,5 +150,69 @@ mod tests {
     fn env_lock() -> &'static Mutex<()> {
         static ENV_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
         ENV_LOCK.get_or_init(|| Mutex::new(()))
+    }
+
+    #[test]
+    fn test_expand_tilde_only() {
+        let input = Path::new("~");
+        let result = expand_tilde(input);
+
+        let home = dirs_next::home_dir().unwrap();
+        assert_eq!(result, home);
+    }
+
+    #[test]
+    fn test_expand_tilde_with_subpath() {
+        let input = Path::new("~/foo/bar");
+        let result = expand_tilde(input);
+
+        let home = dirs_next::home_dir().unwrap();
+        assert_eq!(result, home.join("foo/bar"));
+    }
+
+    #[test]
+    fn test_no_expand_relative_path() {
+        let input = Path::new("./foo/bar");
+        let result = expand_tilde(input);
+
+        assert_eq!(result, Path::new("./foo/bar"));
+    }
+
+    #[test]
+    fn test_no_expand_absolute_path() {
+        let input = if cfg!(windows) {
+            Path::new("C:\\foo\\bar")
+        } else {
+            Path::new("/foo/bar")
+        };
+
+        let result = expand_tilde(input);
+
+        assert_eq!(result, input);
+    }
+
+    #[test]
+    fn test_no_expand_middle_tilde() {
+        let input = Path::new("foo/~/bar");
+        let result = expand_tilde(input);
+
+        assert_eq!(result, input);
+    }
+
+    #[test]
+    fn test_no_expand_double_tilde() {
+        let input = Path::new("~~/foo");
+        let result = expand_tilde(input);
+
+        assert_eq!(result, input);
+    }
+
+    #[test]
+    fn test_tilde_slash_only() {
+        let input = Path::new("~/");
+        let result = expand_tilde(input);
+
+        let home = dirs_next::home_dir().unwrap();
+        assert_eq!(result, home);
     }
 }

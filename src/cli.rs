@@ -100,6 +100,14 @@ mod tests {
     }
 
     #[test]
+    fn keeps_roots_empty_when_not_provided() {
+        let options = Cli::try_parse_from(["cargo-clean-global", "--dry-run"])
+            .expect("arguments should parse");
+
+        assert!(options.roots.is_empty());
+    }
+
+    #[test]
     fn rejects_unknown_arguments() {
         assert!(Cli::try_parse_from(["cargo-clean-global", "--unknown"]).is_err());
     }
