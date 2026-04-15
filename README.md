@@ -54,6 +54,34 @@ Restrict scanning to multiple directories:
 cargo clean-global --root ~/projects --root /work/rust
 ```
 
+Configure default scan roots in your global Cargo config (used when `--root` is not provided):
+
+`$CARGO_HOME/config.toml` (or `$CARGO_HOME/config`).
+In most setups, this is `~/.cargo/config.toml`.
+
+```toml
+[cargo-clean-global]
+roots = ["~/projects", "../rust-workspaces"]
+```
+
+You can also set a single string value:
+
+```toml
+[cargo-clean-global]
+roots = "~/projects"
+```
+
+Root precedence:
+
+1. `--root` values passed on CLI
+2. `[cargo-clean-global].roots` from global Cargo config
+3. Built-in defaults (home/current directory strategy)
+
+Path behavior for `[cargo-clean-global].roots`:
+
+- `~` is expanded to your home directory.
+- Relative paths are resolved relative to the Cargo config file directory.
+
 By default, scanner skips hidden directories whose names start with `.`.
 If your Rust project is inside a hidden directory, explicitly pass that path with `--root`.
 
