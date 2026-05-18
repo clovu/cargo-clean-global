@@ -238,4 +238,34 @@ mod tests {
         fs::remove_dir_all(&root).expect("should remove test project");
         assert!(!root.exists());
     }
+
+    #[test]
+    fn clean_skips_missing_target_directory() {
+        let root = unique_test_dir("clean_skips_missing_target_directory");
+        fs::create_dir_all(&root).expect("should create root directory");
+
+        let root = fs::canonicalize(root).expect("project root should canonicalize");
+        let manifest = root.join("Cargo.toml");
+
+        fs::write(
+            &manifest,
+            "[package]\nname = \"demo\"\nversion = \"0.1.0\"\n",
+        )
+        .expect("should write Cargo.toml");
+
+        let project = CargoProject {
+            root: root.clone(),
+            manifest,
+        };
+
+        let report = clean_projects(&[project], false, None);
+
+        assert!(report.cleaned.is_empty());
+        assert!(report.dry_runs.is_empty());
+        assert_eq!(report.skipped_missing_target, 1);
+        assert!(report.errors.is_empty());
+
+        fs::remove_dir_all(&root).expect("should remove test project");
+        assert!(!root.exists());
+    }
 }
