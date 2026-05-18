@@ -268,4 +268,37 @@ mod tests {
         fs::remove_dir_all(&root).expect("should remove test project");
         assert!(!root.exists());
     }
+
+    #[test]
+    fn clean_skips_target_when_it_is_not_a_directory() {
+        let root = unique_test_dir("clean_skips_target_when_it_is_not_a_directory");
+        fs::create_dir_all(&root).expect("should create root directory");
+
+        let root = fs::canonicalize(root).expect("project root should canonicalize");
+        let target = root.join("target");
+        let manifest = root.join("Cargo.toml");
+
+        fs::write(
+            &manifest,
+            "[package]\nname = \"demo\"\nversion = \"0.1.0\"\n",
+        )
+        .expect("should write Cargo.toml");
+        fs::write(&target, "not a directory").expect("should write target file");
+
+        let project = CargoProject {
+            root: root.clone(),
+            manifest,
+        };
+
+        let report = clean_projects(&[project], false, None);
+
+        assert!(report.cleaned.is_empty());
+        assert!(report.dry_runs.is_empty());
+        assert_eq!(report.skipped_unsafe.len(), 1);
+        assert!(report.errors.is_empty());
+        assert!(target.exists());
+
+        fs::remove_dir_all(&root).expect("should remove test project");
+        assert!(!root.exists());
+    }
 }
