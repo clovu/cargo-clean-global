@@ -154,3 +154,54 @@ fn directory_size_bytes(path: &Path) -> io::Result<u64> {
 
     Ok(total)
 }
+
+#[cfg(test)]
+mod tests {
+    use std::time::{SystemTime, UNIX_EPOCH};
+    use std::{env, fs, path::PathBuf};
+
+    use super::clean_projects;
+    use crate::types::CargoProject;
+
+    fn unique_test_dir(name: &str) -> PathBuf {
+        let nanos = SystemTime::now()
+            .duration_since(UNIX_EPOCH)
+            .expect("time should move forward")
+            .as_nanos();
+
+        env::temp_dir().join(format!("cargo-clean-global-cleanup-{name}-{nanos}"))
+    }
+
+    #[test]
+    fn dry_run_reports_target_without_deleting_it() {
+        let root = unique_test_dir("dry_run_reports_target_without_deleting_it");
+        fs::create_dir_all(&root).expect("should create root directory");
+
+        let root = fs::canonicalize(root).expect("project root should canonicalize");
+        let target = root.join("target");
+        let manifest = root.join("Cargo.toml");
+
+        fs::create_dir_all(&target).expect("should create target directory");
+        fs::write(
+            &manifest,
+            "[package]\nname = \"demo\"\nversion = \"0.1.0\"\n",
+        )
+        .expect("should write Cargo.toml");
+        fs::write(target.join("artifact.txt"), "compiled output")
+            .expect("should write target artifact");
+
+        let project = CargoProject {
+            root: root.clone(),
+            manifest,
+        };
+
+        let report = clean_projects(&[project], true, |_, _| {});
+
+        assert_eq!(report.dry_runs.len(), 1);
+        assert!(report.cleaned.is_empty());
+        assert!(target.exists());
+
+        fs::remove_dir_all(&root).expect("should remove test project");
+        assert!(!root.exists());
+    }
+}
