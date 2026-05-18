@@ -161,6 +161,9 @@ mod tests {
     use std::time::{SystemTime, UNIX_EPOCH};
     use std::{env, fs, path::PathBuf};
 
+    #[cfg(unix)]
+    use std::os::unix::fs as unix_fs;
+
     use super::clean_projects;
     use crate::types::CargoProject;
 
@@ -297,6 +300,49 @@ mod tests {
         assert_eq!(report.skipped_unsafe.len(), 1);
         assert!(report.errors.is_empty());
         assert!(target.exists());
+
+        fs::remove_dir_all(&root).expect("should remove test project");
+        assert!(!root.exists());
+    }
+
+    #[cfg(unix)]
+    #[test]
+    fn clean_skips_target_when_it_is_a_symlink() {
+        let root = unique_test_dir("clean_skips_target_when_it_is_a_symlink");
+        fs::create_dir_all(&root).expect("should create root directory");
+
+        let root = fs::canonicalize(root).expect("project root should canonicalize");
+        let real_target = root.join("real-target");
+        let target = root.join("target");
+        let manifest = root.join("Cargo.toml");
+
+        fs::create_dir_all(&real_target).expect("should create real target directory");
+        fs::write(
+            &manifest,
+            "[package]\nname = \"demo\"\nversion = \"0.1.0\"\n",
+        )
+        .expect("should write Cargo.toml");
+        unix_fs::symlink(&real_target, &target).expect("should create target symlink");
+
+        let project = CargoProject {
+            root: root.clone(),
+            manifest,
+        };
+
+        let report = clean_projects(&[project], false, None);
+
+        assert!(report.cleaned.is_empty());
+        assert!(report.dry_runs.is_empty());
+        assert_eq!(report.skipped_unsafe.len(), 1);
+        assert!(report.errors.is_empty());
+        assert!(
+            target
+                .symlink_metadata()
+                .expect("target symlink should still exist")
+                .file_type()
+                .is_symlink()
+        );
+        assert!(real_target.exists());
 
         fs::remove_dir_all(&root).expect("should remove test project");
         assert!(!root.exists());
