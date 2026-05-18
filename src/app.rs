@@ -283,13 +283,7 @@ fn directory_size_bytes(path: &Path) -> io::Result<u64> {
 }
 
 fn prepare_scan_roots(options: &Cli) -> Result<Vec<PathBuf>, String> {
-    let config_roots = if options.roots.is_empty() {
-        resolve_default_scan_roots_from_global_config().map_err(|error| error.message)?
-    } else {
-        vec![]
-    };
-
-    let raw_roots = select_raw_scan_roots(options, config_roots);
+    let raw_roots = resolve_raw_scan_roots(options)?;
 
     let mut seen = HashSet::new();
     let mut roots = Vec::new();
@@ -312,16 +306,18 @@ fn prepare_scan_roots(options: &Cli) -> Result<Vec<PathBuf>, String> {
     Ok(roots)
 }
 
-fn select_raw_scan_roots(options: &Cli, config_roots: Vec<PathBuf>) -> Vec<PathBuf> {
+fn resolve_raw_scan_roots(options: &Cli) -> Result<Vec<PathBuf>, String> {
     if !options.roots.is_empty() {
-        return options.roots.clone();
+        return Ok(options.roots.clone());
     }
 
+    let config_roots =
+        resolve_default_scan_roots_from_global_config().map_err(|error| error.message)?;
     if !config_roots.is_empty() {
-        return config_roots;
+        return Ok(config_roots);
     }
 
-    default_scan_roots()
+    Ok(default_scan_roots())
 }
 
 fn default_scan_roots() -> Vec<PathBuf> {
@@ -461,7 +457,7 @@ mod tests {
     use super::default_scan_roots;
     use super::parse_confirmation_input;
     use super::prepare_scan_roots;
-    use super::select_raw_scan_roots;
+    use super::resolve_raw_scan_roots;
     use crate::cli::Cli;
     use std::ffi::OsString;
     use std::fs;
@@ -532,6 +528,45 @@ mod tests {
     }
 
     #[test]
+    fn prepare_scan_roots_does_not_read_config_when_cli_roots_exist() {
+        let _guard = env_lock()
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+
+        let base = unique_test_dir("prepare_scan_roots_does_not_read_config_when_cli_roots_exist");
+        let cli_root = base.join("cli-root");
+        let cargo_home = base.join("cargo-home");
+
+        fs::create_dir_all(&cli_root).expect("should create cli root");
+        fs::create_dir_all(&cargo_home).expect("should create cargo home");
+        fs::write(
+            cargo_home.join("config.toml"),
+            "[cargo-clean-global]\nroots = 1\n",
+        )
+        .expect("should write invalid global Cargo config");
+
+        let expected = fs::canonicalize(&cli_root).expect("cli root should canonicalize");
+
+        let original = std::env::var_os("CARGO_HOME");
+        unsafe {
+            std::env::set_var("CARGO_HOME", &cargo_home);
+        }
+
+        let options = Cli {
+            dry_run: false,
+            yes: false,
+            roots: vec![cli_root.clone()],
+        };
+
+        let roots = prepare_scan_roots(&options).expect("cli roots should bypass config");
+
+        restore_cargo_home(original);
+        let _ = fs::remove_dir_all(&base);
+
+        assert_eq!(roots, vec![expected]);
+    }
+
+    #[test]
     fn prepare_scan_roots_uses_config_defaults_when_cli_roots_empty() {
         let _guard = env_lock()
             .lock()
@@ -575,14 +610,30 @@ mod tests {
 
     #[test]
     fn prepare_scan_roots_falls_back_to_builtin_defaults_when_config_roots_empty() {
+        let _guard = env_lock()
+            .lock()
+            .unwrap_or_else(|poisoned| poisoned.into_inner());
+
+        let cargo_home = unique_test_dir("prepare_scan_roots_falls_back_to_builtin_defaults");
+        fs::create_dir_all(&cargo_home).expect("should create cargo home");
+
+        let original = std::env::var_os("CARGO_HOME");
+        unsafe {
+            std::env::set_var("CARGO_HOME", &cargo_home);
+        }
+
         let options = Cli {
             dry_run: false,
             yes: false,
             roots: vec![],
         };
 
-        let selected = select_raw_scan_roots(&options, vec![]);
+        let selected =
+            resolve_raw_scan_roots(&options).expect("builtin defaults should be selected");
         let fallback = default_scan_roots();
+
+        restore_cargo_home(original);
+        let _ = fs::remove_dir_all(&cargo_home);
 
         assert_eq!(selected, fallback);
     }
