@@ -12,14 +12,13 @@ use crate::types::CleanupStatus;
 use crate::types::PathError;
 use crate::types::SkippedProject;
 
-pub(crate) fn clean_projects<F>(
+type ProjectFinishedCallback<'a> = &'a mut dyn FnMut(&CargoProject, &CleanupReport);
+
+pub(crate) fn clean_projects(
     projects: &[CargoProject],
     dry_run: bool,
-    mut on_project_finished: F,
-) -> CleanupReport
-where
-    F: FnMut(&CargoProject, &CleanupReport),
-{
+    mut on_project_finished: Option<ProjectFinishedCallback<'_>>,
+) -> CleanupReport {
     let mut report = CleanupReport::default();
 
     for project in projects {
@@ -31,7 +30,9 @@ where
             Err(error) => report.errors.push(error),
         }
 
-        on_project_finished(project, &report);
+        if let Some(callback) = on_project_finished.as_deref_mut() {
+            callback(project, &report);
+        }
     }
 
     report
@@ -195,7 +196,7 @@ mod tests {
             manifest,
         };
 
-        let report = clean_projects(&[project], true, |_, _| {});
+        let report = clean_projects(&[project], true, None);
 
         assert_eq!(report.dry_runs.len(), 1);
         assert!(report.cleaned.is_empty());

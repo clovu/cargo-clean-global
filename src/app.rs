@@ -121,7 +121,8 @@ pub(crate) fn run(options: Cli) -> ExitCode {
 
     println!("\n🧹 Cleaning projects...\n");
     let clean_progress = cleanup_progress(discovery.projects.len(), options.dry_run);
-    let cleanup = clean_projects(&discovery.projects, options.dry_run, |project, report| {
+
+    let mut on_project_finished = |project: &CargoProject, report: &CleanupReport| {
         clean_progress.inc(1);
         let action_label = if options.dry_run {
             "would clean"
@@ -143,7 +144,13 @@ pub(crate) fn run(options: Cli) -> ExitCode {
             format_bytes(freed_bytes),
             project.root.display(),
         ));
-    });
+    };
+
+    let cleanup = clean_projects(
+        &discovery.projects,
+        options.dry_run,
+        Some(&mut on_project_finished),
+    );
     finish_cleanup_progress(&clean_progress, &cleanup, options.dry_run);
 
     if !cleanup.skipped_unsafe.is_empty() {
