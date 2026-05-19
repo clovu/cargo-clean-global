@@ -13,3 +13,7 @@ indent_brace_style=K&R
 [*.rs]
 tab_width = 4
 indent_size = 4
+
+[justfile]
+tab_width = 4
+indent_size = 4
