@@ -1,3 +1,27 @@
+## [1.2.2](https://github.com/clovu/cargo-clean-global/compare/v1.2.1..v1.2.2) - 2026-05-19
+
+### 🚜 Refactor
+
+- Make cleanup callback optional - ([c437203](https://github.com/clovu/cargo-clean-global/commit/c437203a154e10750ce173f30a2ca7ac2c612625))
+
+### 📚 Documentation
+
+- Add changelog - ([23b135e](https://github.com/clovu/cargo-clean-global/commit/23b135edc8ed20d1df442393b3d84e806271a750))
+- Link changelog entries - ([2e63ad4](https://github.com/clovu/cargo-clean-global/commit/2e63ad405d448da04d8ffd8fba10ab32551cd284))
+
+### 🧪 Testing
+
+- Cover cleanup dry-run behavior - ([dce974c](https://github.com/clovu/cargo-clean-global/commit/dce974c13871088f6a25c5762deb78831407def3))
+- Cover cleanup deletion behavior - ([26bc227](https://github.com/clovu/cargo-clean-global/commit/26bc227f1537a2d711da8064cd20552fa8675eba))
+- Cover missing cleanup target - ([fd02af3](https://github.com/clovu/cargo-clean-global/commit/fd02af3b6659ea7e43dfdf6562331ab9cbd9726d))
+- Cover non-directory cleanup target - ([dede278](https://github.com/clovu/cargo-clean-global/commit/dede2785c7ca1413283a6134301530d2a4ef8e1d))
+- Cover symlink cleanup target - ([7100357](https://github.com/clovu/cargo-clean-global/commit/71003579cd46f186cf91bc72d2b3a8f1c5b37301))
+
+### ⚙️ Miscellaneous Tasks
+
+- Update deps - ([707f62d](https://github.com/clovu/cargo-clean-global/commit/707f62d553238a2bd1d220805435d6d9ea726d49))
+- Remove redundant license-file from Cargo.toml - ([d059d3f](https://github.com/clovu/cargo-clean-global/commit/d059d3ff3595494b5f298fea2eef88ee005cc766))
+- Disable automatic spelling correction in commit messages - ([ed32129](https://github.com/clovu/cargo-clean-global/commit/ed32129c6e1ba1782d3b04856654e88178c88a05))
 ## [1.2.1](https://github.com/clovu/cargo-clean-global/compare/v1.2.0..v1.2.1) - 2026-04-16
 
 ### 🐛 Bug Fixes
