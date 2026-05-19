@@ -1,3 +1,11 @@
+## [1.2.3](https://github.com/clovu/cargo-clean-global/compare/v1.2.2..v1.2.3) - 2026-05-19
+
+### ⚙️ Miscellaneous Tasks
+
+- Generate release notes with git-cliff - ([6c88122](https://github.com/clovu/cargo-clean-global/commit/6c88122ca21335a0952ce05075cf5d5656819231))
+- Publish crate after release artifacts - ([4978538](https://github.com/clovu/cargo-clean-global/commit/49785380ed0c0d798214dda44b2f2ed4f9199db7))
+- Improve crate metadata - ([97bde8e](https://github.com/clovu/cargo-clean-global/commit/97bde8e991aad76d314b9092367e47d7405850ce))
+- Bump version to 1.2.3 - ([27f6b78](https://github.com/clovu/cargo-clean-global/commit/27f6b787dfa5e44e82c927596d8c36794d68e979))
 ## [1.2.2](https://github.com/clovu/cargo-clean-global/compare/v1.2.1..v1.2.2) - 2026-05-19
 
 ### 🚜 Refactor
@@ -22,6 +30,7 @@
 - Update deps - ([707f62d](https://github.com/clovu/cargo-clean-global/commit/707f62d553238a2bd1d220805435d6d9ea726d49))
 - Remove redundant license-file from Cargo.toml - ([d059d3f](https://github.com/clovu/cargo-clean-global/commit/d059d3ff3595494b5f298fea2eef88ee005cc766))
 - Disable automatic spelling correction in commit messages - ([ed32129](https://github.com/clovu/cargo-clean-global/commit/ed32129c6e1ba1782d3b04856654e88178c88a05))
+- Bump version to 1.2.2 - ([35f1a9b](https://github.com/clovu/cargo-clean-global/commit/35f1a9bddd3192c83e2f57448ba4abe9667dc8a1))
 ## [1.2.1](https://github.com/clovu/cargo-clean-global/compare/v1.2.0..v1.2.1) - 2026-04-16
 
 ### 🐛 Bug Fixes
