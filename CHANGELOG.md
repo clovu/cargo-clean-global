@@ -1,3 +1,17 @@
+## [1.2.5](https://github.com/clovu/cargo-clean-global/compare/v1.2.4..v1.2.5) - 2026-05-19
+
+### ⚙️ Miscellaneous Tasks
+
+- *(ci)* Add dependabot updates - ([4c45f86](https://github.com/clovu/cargo-clean-global/commit/4c45f861a2eda511dba44a68e4809772bc75efd9))
+- *(release)* Update pre-release commit and tag messages for clarity - ([81ece43](https://github.com/clovu/cargo-clean-global/commit/81ece436bb13bae44705381c0c2e1c5ecdf9629d))
+- Update release command to remove redundant --no-push flag - ([3ec515f](https://github.com/clovu/cargo-clean-global/commit/3ec515f21d573b6e46d34e797cbee8be3b186f31))
+- Update pre-release commit message format to include 'v' prefix - ([e8cda3c](https://github.com/clovu/cargo-clean-global/commit/e8cda3c4c5b029744c9029d886ba470b7196c25b))
+- Add cargo-release workflow - ([6c12e4e](https://github.com/clovu/cargo-clean-global/commit/6c12e4e0637687a3bd7cbce304dda2ff0ea07fe2))
+
+## New Contributors ❤️
+
+
+* @dependabot[bot] made their first contribution in [#3](https://github.com/clovu/cargo-clean-global/pull/3)
 ## [1.2.4](https://github.com/clovu/cargo-clean-global/compare/v1.2.3..v1.2.4) - 2026-05-19
 
 ### 🐛 Bug Fixes
@@ -6,7 +20,9 @@
 
 ### ⚙️ Miscellaneous Tasks
 
+- Bump version to 1.2.4 - ([f523ff9](https://github.com/clovu/cargo-clean-global/commit/f523ff9bba60f82ba3f230e0e3ec8b2e47ba1f61))
 - Change changelog commit sorting order to newest - ([3bf28ee](https://github.com/clovu/cargo-clean-global/commit/3bf28eea0526322859cce02974f4a8afb1498c47))
+
 ## [1.2.3](https://github.com/clovu/cargo-clean-global/compare/v1.2.2..v1.2.3) - 2026-05-19
 
 ### ⚙️ Miscellaneous Tasks
@@ -15,6 +31,7 @@
 - Improve crate metadata - ([97bde8e](https://github.com/clovu/cargo-clean-global/commit/97bde8e991aad76d314b9092367e47d7405850ce))
 - Publish crate after release artifacts - ([4978538](https://github.com/clovu/cargo-clean-global/commit/49785380ed0c0d798214dda44b2f2ed4f9199db7))
 - Generate release notes with git-cliff - ([6c88122](https://github.com/clovu/cargo-clean-global/commit/6c88122ca21335a0952ce05075cf5d5656819231))
+
 ## [1.2.2](https://github.com/clovu/cargo-clean-global/compare/v1.2.1..v1.2.2) - 2026-05-19
 
 ### 🚜 Refactor
@@ -40,6 +57,7 @@
 - Disable automatic spelling correction in commit messages - ([ed32129](https://github.com/clovu/cargo-clean-global/commit/ed32129c6e1ba1782d3b04856654e88178c88a05))
 - Remove redundant license-file from Cargo.toml - ([d059d3f](https://github.com/clovu/cargo-clean-global/commit/d059d3ff3595494b5f298fea2eef88ee005cc766))
 - Update deps - ([707f62d](https://github.com/clovu/cargo-clean-global/commit/707f62d553238a2bd1d220805435d6d9ea726d49))
+
 ## [1.2.1](https://github.com/clovu/cargo-clean-global/compare/v1.2.0..v1.2.1) - 2026-04-16
 
 ### 🐛 Bug Fixes
@@ -50,6 +68,7 @@
 
 - Bump version to 1.2.1 - ([d1ffba1](https://github.com/clovu/cargo-clean-global/commit/d1ffba1a2c63f9d13bb67c355d3dad5661b1f056))
 - Uptd deps - ([9d0433f](https://github.com/clovu/cargo-clean-global/commit/9d0433f0eca046ba3ea805a69bd1b4bcab124ebf))
+
 ## [1.2.0](https://github.com/clovu/cargo-clean-global/compare/v1.1.0..v1.2.0) - 2026-04-15
 
 ### 🚀 Features
@@ -69,6 +88,7 @@
 - Bump version to 1.2.0 - ([a805d93](https://github.com/clovu/cargo-clean-global/commit/a805d93ed00c7a2c3108580a6d7e6f2926bb9c6f))
 - Add "pathbuf" to cSpell words list in settings.json - ([38d19ca](https://github.com/clovu/cargo-clean-global/commit/38d19ca4abf4520334f967e76725e714454aa078))
 - Add "indicatif" to cSpell words list in settings.json - ([dbe2e46](https://github.com/clovu/cargo-clean-global/commit/dbe2e4684c776e5e8508dd7002ebefc5ed32f4cf))
+
 ## [1.1.0](https://github.com/clovu/cargo-clean-global/compare/v1.0.1..v1.1.0) - 2026-04-02
 
 ### 🚀 Features
@@ -86,6 +106,7 @@
 
 - Bump version to 1.1.0 - ([9d5cbd4](https://github.com/clovu/cargo-clean-global/commit/9d5cbd4730e05e356dc71bf49af4d944a7b1d851))
 - Fmt - ([2ebf173](https://github.com/clovu/cargo-clean-global/commit/2ebf1732e353891917615e9cd4ef444630c38dd2))
+
 ## [1.0.1](https://github.com/clovu/cargo-clean-global/compare/v1.0.0..v1.0.1) - 2026-03-28
 
 ### 🐛 Bug Fixes
@@ -95,6 +116,7 @@
 ### ⚙️ Miscellaneous Tasks
 
 - Update version to 1.0.1 - ([1581b97](https://github.com/clovu/cargo-clean-global/commit/1581b9758a02e8e79cb6cb171d2b0d998b95d0ae))
+
 ## [1.0.0](https://github.com/clovu/cargo-clean-global/compare/v0.1.0..v1.0.0) - 2026-03-19
 
 ### 🐛 Bug Fixes
@@ -108,6 +130,7 @@
 ### ⚙️ Miscellaneous Tasks
 
 - Release version 1.0.0 - ([49c691b](https://github.com/clovu/cargo-clean-global/commit/49c691b5369d3b967ec3d0a1b81cd4469bd41db6))
+
 ## [0.1.0] - 2026-03-19
 
 ### 🚀 Features
@@ -120,5 +143,6 @@
 - Config file - ([599669e](https://github.com/clovu/cargo-clean-global/commit/599669e31bed16fae63c6dcfd2ef1aad0126f916))
 
 ## New Contributors ❤️
+
 
 * @clovu made their first contribution
