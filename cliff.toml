@@ -122,6 +122,6 @@ topo_order = false
 topo_order_commits = true
 # Order of commits in each group/release within the changelog.
 # Allowed values: newest, oldest
-sort_commits = "oldest"
+sort_commits = "newest"
 # Process submodules commits
 recurse_submodules = false
