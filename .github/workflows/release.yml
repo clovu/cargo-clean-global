@@ -277,6 +277,13 @@ jobs:
       contents: write
 
     steps:
+      # Fetch the tagged source code and full tag history so git-cliff can
+      # generate release notes for the tag that triggered this workflow.
+      - name: Check out source code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
       # Download all archives produced by the matrix build jobs.
       - name: Download packaged artifacts
         uses: actions/download-artifact@v4
@@ -285,12 +292,24 @@ jobs:
           path: release-assets
           merge-multiple: true
 
-      # Create or update the GitHub Release, upload assets, and auto-generate release notes.
+      # Generate the release body from Conventional Commits instead of relying
+      # on GitHub's PR-based generated notes, which can be empty for tag-only releases.
+      - name: Generate release notes
+        uses: orhun/git-cliff-action@v4
+        with:
+          config: cliff.toml
+          args: --current --strip all
+        env:
+          OUTPUT: release-notes.md
+          GITHUB_REPO: ${{ github.repository }}
+          GITHUB_TOKEN: ${{ github.token }}
+
+      # Create or update the GitHub Release and upload assets.
       - name: Publish GitHub Release
         uses: softprops/action-gh-release@v2
         with:
           tag_name: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
+          body_path: release-notes.md
           files: release-assets/*
           fail_on_unmatched_files: true
-          generate_release_notes: true
