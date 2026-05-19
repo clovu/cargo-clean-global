@@ -26,7 +26,7 @@ jobs:
     steps:
       # Fetch the repository so Rust commands can inspect the workspace.
       - name: Check out source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Install the stable Rust toolchain and the components required for linting.
       - name: Install Rust toolchain
@@ -63,7 +63,7 @@ jobs:
       # Fetch the tagged source code so the release tag can be compared with
       # the package version before any release artifacts are built or published.
       - name: Check out source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Install Rust so cargo metadata can inspect the tagged package.
       - name: Install Rust toolchain
@@ -135,7 +135,7 @@ jobs:
     steps:
       # Fetch the repository content used by the build.
       - name: Check out source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Install the stable Rust compiler used for release builds.
       - name: Install Rust toolchain
@@ -239,7 +239,7 @@ jobs:
 
       # Store each packaged artifact in the workflow run for easy manual download.
       - name: Upload workflow artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: release-${{ matrix.platform }}
           path: dist/${{ steps.bundle.outputs.archive_base }}.${{ matrix.archive_ext }}
@@ -259,13 +259,13 @@ jobs:
       # Fetch the tagged source code and full tag history so git-cliff can
       # generate release notes for the tag that triggered this workflow.
       - name: Check out source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
         with:
           fetch-depth: 0
 
       # Download all archives produced by the matrix build jobs.
       - name: Download packaged artifacts
-        uses: actions/download-artifact@v4
+        uses: actions/download-artifact@v8
         with:
           pattern: release-*
           path: release-assets
@@ -285,7 +285,7 @@ jobs:
 
       # Create or update the GitHub Release and upload assets.
       - name: Publish GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
@@ -301,7 +301,7 @@ jobs:
     steps:
       # Fetch the tagged source code that will be published to crates.io.
       - name: Check out source code
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       # Install the stable Rust compiler used for packaging and publishing.
       - name: Install Rust toolchain
