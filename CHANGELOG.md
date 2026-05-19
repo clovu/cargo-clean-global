@@ -1,11 +1,20 @@
+## [1.2.4](https://github.com/clovu/cargo-clean-global/compare/v1.2.3..v1.2.4) - 2026-05-19
+
+### 🐛 Bug Fixes
+
+- *(package)* Satisfy crates.io keyword limit - ([fa74201](https://github.com/clovu/cargo-clean-global/commit/fa7420115b2451d0c8d9e71abc9146460403e384))
+
+### ⚙️ Miscellaneous Tasks
+
+- Change changelog commit sorting order to newest - ([3bf28ee](https://github.com/clovu/cargo-clean-global/commit/3bf28eea0526322859cce02974f4a8afb1498c47))
 ## [1.2.3](https://github.com/clovu/cargo-clean-global/compare/v1.2.2..v1.2.3) - 2026-05-19
 
 ### ⚙️ Miscellaneous Tasks
 
-- Generate release notes with git-cliff - ([6c88122](https://github.com/clovu/cargo-clean-global/commit/6c88122ca21335a0952ce05075cf5d5656819231))
-- Publish crate after release artifacts - ([4978538](https://github.com/clovu/cargo-clean-global/commit/49785380ed0c0d798214dda44b2f2ed4f9199db7))
+- Bump version to 1.2.3 - ([235faa7](https://github.com/clovu/cargo-clean-global/commit/235faa721b51b6eef68684c73a41746a3bf8cadf))
 - Improve crate metadata - ([97bde8e](https://github.com/clovu/cargo-clean-global/commit/97bde8e991aad76d314b9092367e47d7405850ce))
-- Bump version to 1.2.3 - ([27f6b78](https://github.com/clovu/cargo-clean-global/commit/27f6b787dfa5e44e82c927596d8c36794d68e979))
+- Publish crate after release artifacts - ([4978538](https://github.com/clovu/cargo-clean-global/commit/49785380ed0c0d798214dda44b2f2ed4f9199db7))
+- Generate release notes with git-cliff - ([6c88122](https://github.com/clovu/cargo-clean-global/commit/6c88122ca21335a0952ce05075cf5d5656819231))
 ## [1.2.2](https://github.com/clovu/cargo-clean-global/compare/v1.2.1..v1.2.2) - 2026-05-19
 
 ### 🚜 Refactor
@@ -14,23 +23,23 @@
 
 ### 📚 Documentation
 
-- Add changelog - ([23b135e](https://github.com/clovu/cargo-clean-global/commit/23b135edc8ed20d1df442393b3d84e806271a750))
 - Link changelog entries - ([2e63ad4](https://github.com/clovu/cargo-clean-global/commit/2e63ad405d448da04d8ffd8fba10ab32551cd284))
+- Add changelog - ([23b135e](https://github.com/clovu/cargo-clean-global/commit/23b135edc8ed20d1df442393b3d84e806271a750))
 
 ### 🧪 Testing
 
-- Cover cleanup dry-run behavior - ([dce974c](https://github.com/clovu/cargo-clean-global/commit/dce974c13871088f6a25c5762deb78831407def3))
-- Cover cleanup deletion behavior - ([26bc227](https://github.com/clovu/cargo-clean-global/commit/26bc227f1537a2d711da8064cd20552fa8675eba))
-- Cover missing cleanup target - ([fd02af3](https://github.com/clovu/cargo-clean-global/commit/fd02af3b6659ea7e43dfdf6562331ab9cbd9726d))
-- Cover non-directory cleanup target - ([dede278](https://github.com/clovu/cargo-clean-global/commit/dede2785c7ca1413283a6134301530d2a4ef8e1d))
 - Cover symlink cleanup target - ([7100357](https://github.com/clovu/cargo-clean-global/commit/71003579cd46f186cf91bc72d2b3a8f1c5b37301))
+- Cover non-directory cleanup target - ([dede278](https://github.com/clovu/cargo-clean-global/commit/dede2785c7ca1413283a6134301530d2a4ef8e1d))
+- Cover missing cleanup target - ([fd02af3](https://github.com/clovu/cargo-clean-global/commit/fd02af3b6659ea7e43dfdf6562331ab9cbd9726d))
+- Cover cleanup deletion behavior - ([26bc227](https://github.com/clovu/cargo-clean-global/commit/26bc227f1537a2d711da8064cd20552fa8675eba))
+- Cover cleanup dry-run behavior - ([dce974c](https://github.com/clovu/cargo-clean-global/commit/dce974c13871088f6a25c5762deb78831407def3))
 
 ### ⚙️ Miscellaneous Tasks
 
-- Update deps - ([707f62d](https://github.com/clovu/cargo-clean-global/commit/707f62d553238a2bd1d220805435d6d9ea726d49))
-- Remove redundant license-file from Cargo.toml - ([d059d3f](https://github.com/clovu/cargo-clean-global/commit/d059d3ff3595494b5f298fea2eef88ee005cc766))
-- Disable automatic spelling correction in commit messages - ([ed32129](https://github.com/clovu/cargo-clean-global/commit/ed32129c6e1ba1782d3b04856654e88178c88a05))
 - Bump version to 1.2.2 - ([35f1a9b](https://github.com/clovu/cargo-clean-global/commit/35f1a9bddd3192c83e2f57448ba4abe9667dc8a1))
+- Disable automatic spelling correction in commit messages - ([ed32129](https://github.com/clovu/cargo-clean-global/commit/ed32129c6e1ba1782d3b04856654e88178c88a05))
+- Remove redundant license-file from Cargo.toml - ([d059d3f](https://github.com/clovu/cargo-clean-global/commit/d059d3ff3595494b5f298fea2eef88ee005cc766))
+- Update deps - ([707f62d](https://github.com/clovu/cargo-clean-global/commit/707f62d553238a2bd1d220805435d6d9ea726d49))
 ## [1.2.1](https://github.com/clovu/cargo-clean-global/compare/v1.2.0..v1.2.1) - 2026-04-16
 
 ### 🐛 Bug Fixes
@@ -39,8 +48,8 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- Uptd deps - ([9d0433f](https://github.com/clovu/cargo-clean-global/commit/9d0433f0eca046ba3ea805a69bd1b4bcab124ebf))
 - Bump version to 1.2.1 - ([d1ffba1](https://github.com/clovu/cargo-clean-global/commit/d1ffba1a2c63f9d13bb67c355d3dad5661b1f056))
+- Uptd deps - ([9d0433f](https://github.com/clovu/cargo-clean-global/commit/9d0433f0eca046ba3ea805a69bd1b4bcab124ebf))
 ## [1.2.0](https://github.com/clovu/cargo-clean-global/compare/v1.1.0..v1.2.0) - 2026-04-15
 
 ### 🚀 Features
@@ -57,26 +66,26 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- Add "indicatif" to cSpell words list in settings.json - ([dbe2e46](https://github.com/clovu/cargo-clean-global/commit/dbe2e4684c776e5e8508dd7002ebefc5ed32f4cf))
-- Add "pathbuf" to cSpell words list in settings.json - ([38d19ca](https://github.com/clovu/cargo-clean-global/commit/38d19ca4abf4520334f967e76725e714454aa078))
 - Bump version to 1.2.0 - ([a805d93](https://github.com/clovu/cargo-clean-global/commit/a805d93ed00c7a2c3108580a6d7e6f2926bb9c6f))
+- Add "pathbuf" to cSpell words list in settings.json - ([38d19ca](https://github.com/clovu/cargo-clean-global/commit/38d19ca4abf4520334f967e76725e714454aa078))
+- Add "indicatif" to cSpell words list in settings.json - ([dbe2e46](https://github.com/clovu/cargo-clean-global/commit/dbe2e4684c776e5e8508dd7002ebefc5ed32f4cf))
 ## [1.1.0](https://github.com/clovu/cargo-clean-global/compare/v1.0.1..v1.1.0) - 2026-04-02
 
 ### 🚀 Features
 
-- *(cli)* Improve terminal output readability and error highlighting - ([fb6f455](https://github.com/clovu/cargo-clean-global/commit/fb6f45533c1af52c57833055549052cebe59ad85))
 - *(cli)* Polish scan/cleanup console output formatting #1 - ([b45b59c](https://github.com/clovu/cargo-clean-global/commit/b45b59cf10d947ccbeac3090d6cd43de2f98013e))
+- *(cli)* Improve terminal output readability and error highlighting - ([fb6f455](https://github.com/clovu/cargo-clean-global/commit/fb6f45533c1af52c57833055549052cebe59ad85))
 - *(progress)* Unify spinner status with scan and cleanup size metrics - ([ec65bc0](https://github.com/clovu/cargo-clean-global/commit/ec65bc08ee986536435961952c41551c1a36d46d))
 
 ### 🐛 Bug Fixes
 
-- *(cli)* Allow debug runs without cargo subcommand forwarding - ([b85fe68](https://github.com/clovu/cargo-clean-global/commit/b85fe684fd32bfd6dd78e741d649d25fc11729a1))
 - *(cli)* Preserve cargo-forwarded subcommand parsing in debug mode - ([89cdcf2](https://github.com/clovu/cargo-clean-global/commit/89cdcf212cdd55c28d31444d64a58ab75212b8f6))
+- *(cli)* Allow debug runs without cargo subcommand forwarding - ([b85fe68](https://github.com/clovu/cargo-clean-global/commit/b85fe684fd32bfd6dd78e741d649d25fc11729a1))
 
 ### ⚙️ Miscellaneous Tasks
 
-- Fmt - ([2ebf173](https://github.com/clovu/cargo-clean-global/commit/2ebf1732e353891917615e9cd4ef444630c38dd2))
 - Bump version to 1.1.0 - ([9d5cbd4](https://github.com/clovu/cargo-clean-global/commit/9d5cbd4730e05e356dc71bf49af4d944a7b1d851))
+- Fmt - ([2ebf173](https://github.com/clovu/cargo-clean-global/commit/2ebf1732e353891917615e9cd4ef444630c38dd2))
 ## [1.0.1](https://github.com/clovu/cargo-clean-global/compare/v1.0.0..v1.0.1) - 2026-03-28
 
 ### 🐛 Bug Fixes
@@ -107,8 +116,8 @@
 
 ### ⚙️ Miscellaneous Tasks
 
-- Config file - ([599669e](https://github.com/clovu/cargo-clean-global/commit/599669e31bed16fae63c6dcfd2ef1aad0126f916))
 - Publish crate to crates.io from release tags - ([cd4ab36](https://github.com/clovu/cargo-clean-global/commit/cd4ab3656e9ee0e34fe7933bbbd3e71d0f97c6c0))
+- Config file - ([599669e](https://github.com/clovu/cargo-clean-global/commit/599669e31bed16fae63c6dcfd2ef1aad0126f916))
 
 ## New Contributors ❤️
 
