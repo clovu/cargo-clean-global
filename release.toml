@@ -1,6 +1,6 @@
 allow-branch = ["main"]
 consolidate-commits = false
-pre-release-commit-message = "chore: bump version to {{version}}"
+pre-release-commit-message = "chore: bump version to v{{version}}"
 pre-release-hook = ["sh", "scripts/release-changelog.sh"]
 publish = false
 push = true
