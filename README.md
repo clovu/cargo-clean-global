@@ -103,7 +103,33 @@ Contributions of any kind are welcome! If you have ideas or suggestions, feel fr
 
 ## Release Automation
 
-Pushing a version tag that matches `v<package-version>` runs the release workflow, builds the release artifacts, creates the GitHub Release, and publishes the crate to crates.io.
+Install the local release helpers:
+
+```bash
+cargo install cargo-release
+cargo install git-cliff
+brew install just
+```
+
+Prepare and verify a release without pushing anything:
+
+```bash
+just release-dry-run 1.2.5
+```
+
+Create the release commit and tag locally:
+
+```bash
+just release 1.2.5
+```
+
+Create the release commit, tag, and push them to `origin`:
+
+```bash
+just release-execute 1.2.5
+```
+
+Pushing a version tag that matches `v<package-version>` runs the release workflow, builds the release artifacts, creates the GitHub Release, and publishes the crate to crates.io. The release workflow publishes to crates.io only after the GitHub Release and its binary artifacts are created.
 
 Repository maintainers must configure the `CRATES_IO_TOKEN` GitHub Actions secret before using this flow.
 

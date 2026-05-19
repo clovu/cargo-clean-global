@@ -1,0 +1,11 @@
+allow-branch = ["main"]
+consolidate-commits = false
+pre-release-commit-message = "chore: release version {{version}}"
+pre-release-hook = ["sh", "scripts/release-changelog.sh"]
+publish = false
+push = true
+push-remote = "origin"
+tag = true
+tag-message = "v{{version}}"
+tag-name = "v{{version}}"
+verify = true
