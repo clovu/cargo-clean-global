@@ -1,7 +1,13 @@
 [package]
 authors = ["Clover You <hi@clovu.me>"]
-categories = ["development-tools::cargo-plugins"]
-description = "A safe Cargo plugin that cleans target directories across local Cargo projects."
+categories = [
+  "command-line-utilities",
+  "development-tools",
+  "development-tools::cargo-plugins",
+  "filesystem",
+]
+description = "Clean Cargo target directories across Rust projects to reclaim disk space."
+documentation = "https://github.com/clovu/cargo-clean-global#readme"
 edition = "2024"
 exclude = [
   "/.DS_Store",
@@ -11,7 +17,8 @@ exclude = [
   "/.vscode/",
   "/target/",
 ]
-keywords = ["cargo", "clean", "target", "cli"]
+homepage = "https://github.com/clovu/cargo-clean-global"
+keywords = ["cargo", "clean", "target", "disk", "cache", "cli"]
 license = "MIT"
 name = "cargo-clean-global"
 readme = "README.md"
