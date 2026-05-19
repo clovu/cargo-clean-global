@@ -18,7 +18,7 @@ exclude = [
   "/target/",
 ]
 homepage = "https://github.com/clovu/cargo-clean-global"
-keywords = ["cargo", "clean", "target", "disk", "cache", "cli"]
+keywords = ["cargo", "clean", "target", "disk", "cache"]
 license = "MIT"
 name = "cargo-clean-global"
 readme = "README.md"
