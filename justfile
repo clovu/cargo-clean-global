@@ -31,7 +31,7 @@ release-dry-run version: check-tools
     cargo release {{version}} --no-publish --no-push
 
 release version: check-tools ci
-    cargo release {{version}} --no-publish --no-push --execute
+    cargo release {{version}} --no-publish --execute
 
 release-execute version: check-tools ci
     cargo release {{version}} --no-publish --execute
