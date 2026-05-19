@@ -84,7 +84,7 @@ commit_preprocessors = [
   { pattern = '\((\w+\s)?#([0-9]+)\)', replace = "([#${2}](<REPO>/issues/${2}))" },
   # Check spelling of the commit message using https://github.com/crate-ci/typos.
   # If the spelling is incorrect, it will be fixed automatically.
-  { pattern = '.*', replace_command = 'typos --write-changes -' },
+  # { pattern = '.*', replace_command = 'typos --write-changes -' },
 ]
 # Prevent commits that are breaking from being excluded by commit parsers.
 protect_breaking_commits = false
