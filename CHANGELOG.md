@@ -1,9 +1,16 @@
+## [1.2.6](https://github.com/clovu/cargo-clean-global/compare/v1.2.5..v1.2.6) - 2026-06-24
+
+### ⚙️ Miscellaneous Tasks
+
+- Add Justfile configuration to .editorconfig - ([5bef67b](https://github.com/clovu/cargo-clean-global/commit/5bef67b9ac1136ab28f59319d3f114218331fa45))
+
 ## [1.2.5](https://github.com/clovu/cargo-clean-global/compare/v1.2.4..v1.2.5) - 2026-05-19
 
 ### ⚙️ Miscellaneous Tasks
 
 - *(ci)* Add dependabot updates - ([4c45f86](https://github.com/clovu/cargo-clean-global/commit/4c45f861a2eda511dba44a68e4809772bc75efd9))
 - *(release)* Update pre-release commit and tag messages for clarity - ([81ece43](https://github.com/clovu/cargo-clean-global/commit/81ece436bb13bae44705381c0c2e1c5ecdf9629d))
+- Bump version to v1.2.5 - ([32f7f42](https://github.com/clovu/cargo-clean-global/commit/32f7f4277b9e75148107c03fa53814de7601e835))
 - Update release command to remove redundant --no-push flag - ([3ec515f](https://github.com/clovu/cargo-clean-global/commit/3ec515f21d573b6e46d34e797cbee8be3b186f31))
 - Update pre-release commit message format to include 'v' prefix - ([e8cda3c](https://github.com/clovu/cargo-clean-global/commit/e8cda3c4c5b029744c9029d886ba470b7196c25b))
 - Add cargo-release workflow - ([6c12e4e](https://github.com/clovu/cargo-clean-global/commit/6c12e4e0637687a3bd7cbce304dda2ff0ea07fe2))
