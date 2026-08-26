@@ -2,6 +2,7 @@
 
 ### ⚙️ Miscellaneous Tasks
 
+- Bump version to v1.2.6 - ([28421fb](https://github.com/clovu/cargo-clean-global/commit/28421fbd5be1ee7506f2fc9f98196a4e3a43d31a))
 - Add Justfile configuration to .editorconfig - ([5bef67b](https://github.com/clovu/cargo-clean-global/commit/5bef67b9ac1136ab28f59319d3f114218331fa45))
 
 ## [1.2.5](https://github.com/clovu/cargo-clean-global/compare/v1.2.4..v1.2.5) - 2026-05-19
